@@ -1,0 +1,7 @@
+redis: &redis
+  adapter: redis
+  url: redis://127.0.0.1:6379/1
+#  channel_prefix: sdesk
+
+production: *redis
+development: *redis

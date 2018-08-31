@@ -1,0 +1,14 @@
+<% if @table.present? %>
+$("#<%= j @table %>_datatable").DataTable().draw(false);
+<% else %>
+$("#<%= j controller_name %>_datatable").DataTable().draw(false);
+<% end %>
+
+<% if notice || alert %>
+toastr['<%= notice ? 'success' : 'warning' %>']('<%= (notice || alert).html_safe %>', {
+    "closeButton": true,
+    "newestOnTop": true,
+    "progressBar": true,
+    "preventDuplicates": true
+});
+<% end %>

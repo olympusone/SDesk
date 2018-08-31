@@ -1,0 +1,17 @@
+<div class="nk-widget nk-widget-highlighted">
+  <h4 class="nk-widget-title"><span><span class="text-main-1">Top 3</span> Recent</span></h4>
+  <div class="nk-widget-content">
+
+
+    <% Post.active.limit(3).each do |p| %>
+      <div class="nk-widget-post">
+        <%= link_to image_tag(url_for(p.poster), lazy: true), p, class: 'nk-post-image' if p.poster.attached? %>
+        <h3 class="nk-post-title"><%= link_to p.title, p  %></h3>
+        <div class="nk-post-date">
+          <%= icon('fas', 'calendar-alt', p.created_at.to_s(:short)) %>
+        </div>
+      </div>
+    <% end %>
+
+  </div>
+</div>

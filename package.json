@@ -1,0 +1,16 @@
+{
+  "name": "sdesk",
+  "private": true,
+  "dependencies": {
+    "bootstrap-tagsinput": "^0.7.1",
+    "fastclick": "^1.0.6",
+    "ionicons": "^4.3.0",
+    "lazyload": "^2.0.0-beta.2",
+    "morris.js": "^0.5.0",
+    "raphael": "^2.2.7",
+    "select2": "^4.0.6-rc.1",
+    "sweetalert2": "^7.26.10",
+    "toastr": "^2.1.4",
+    "underscore": "^1.9.1"
+  }
+}

@@ -1,0 +1,10 @@
+<div class="nk-widget nk-widget-highlighted">
+  <h4 class="nk-widget-title"><span><%= t('widgets.social').html_safe %></span></h4>
+  <div class="nk-widget-content">
+    <ul class="nk-social-links-3 nk-social-links-cols-4">
+      <% Social.all.each do |s| %>
+        <li><%= link_to icon('fab', s.provider), s.url, class:"nk-social-#{s.provider}" %></li>
+      <% end %>
+    </ul>
+  </div>
+</div>

@@ -1,0 +1,32 @@
+$('.is-invalid', '.modal-body').removeClass('is-invalid');
+$('.invalid-feedback', '.modal-body').remove();
+
+<% if resource.errors.any? %>
+  $('.modal-body').find('.alert').remove();
+  $('.modal-body').prepend("<%= j render 'shared/form_errors', resource: resource %>");
+
+  <% resource.errors.messages.each do |input, errors| %>
+  $('.modal-body').find("[name$='[<%= input %>]']").addClass('is-invalid');
+
+    <% errors.each do |error| %>
+    $('.modal-body').find("[name$='[<%= input %>]']").closest('.form-group')
+        .append("<span class='invalid-feedback'><%= error %></span>");
+    <% end %>
+  <% end %>
+
+<% else %>
+$('.modal').modal('hide');
+
+  if ($("#<%= j controller_name %>_datatable").length) {
+      $("#<%= j controller_name %>_datatable").DataTable().draw(false);
+  }
+<% end %>
+
+<% if notice || alert %>
+toastr['<%= notice ? 'success' : 'warning' %>']('<%= (notice || alert).html_safe %>', {
+    "closeButton": true,
+    "newestOnTop": true,
+    "progressBar": true,
+    "preventDuplicates": true
+});
+<% end %>

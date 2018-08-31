@@ -1,0 +1,108 @@
+<!-- ============================================================== -->
+<!-- Topbar header - style you can find in pages.scss -->
+<!-- ============================================================== -->
+<header class="topbar">
+  <nav class="navbar top-navbar navbar-expand-md navbar-dark">
+    <!-- ============================================================== -->
+    <!-- Logo -->
+    <!-- ============================================================== -->
+    <div class="navbar-header">
+      <a class="navbar-brand" href="
+        <% root_path %>">
+        <b>
+          <%= image_tag image_path('logo.png'), class: 'dark-logo' %>
+          <%= image_tag image_path('logo.png'), class: 'light-logo' %>
+        </b>
+        <%= Setting.company_name %>
+      </a>
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Logo -->
+    <!-- ============================================================== -->
+    <div class="navbar-collapse">
+      <!-- ============================================================== -->
+      <!-- toggle and nav items -->
+      <!-- ============================================================== -->
+      <ul class="navbar-nav mr-auto">
+        <!-- This is  -->
+        <li class="nav-item">
+          <a class="nav-link nav-toggler d-block d-md-none waves-effect waves-dark" href="javascript:void(0)"><i class="ti-menu"></i></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link sidebartoggler d-none waves-effect waves-dark" href="javascript:void(0)"><i class="icon-menu"></i></a>
+        </li>
+        <!-- ============================================================== -->
+        <!-- Search -->
+        <!-- ============================================================== -->
+        <li class="nav-item">
+          <form class="app-search d-none d-md-block d-lg-block">
+            <input type="text" class="form-control" placeholder="Search & enter">
+          </form>
+        </li>
+      </ul>
+
+      <ul class="navbar-nav my-lg-0">
+        <% if user_signed_in? %>
+          <li class="nav-item dropdown u-pro">
+            <a class="nav-link dropdown-toggle waves-effect waves-dark profile-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <%= image_tag current_user.avatar_path %>
+              <span class="hidden-md-down"><%= current_user.user.name %><i class="fas fa-angle-down"></i></span> </a>
+            <div class="dropdown-menu dropdown-menu-right animated flipInY">
+              <%= link_to icon('fas', 'user', t('header.profile')), current_user.user, class: 'dropdown-item' %>
+              <div class="dropdown-divider"></div>
+              <%= link_to icon('fas', 'power-off', t('devise.sessions.signed_out_btn')), destroy_user_session_path, class: 'dropdown-item' %>
+            </div>
+          </li>
+        <% else %>
+          <li class="nav-item u-pro">
+            <%= link_to t('devise.sessions.sign_in_btn'), new_user_session_path, class:'nav-link waves-effect waves-dark' %>
+          </li>
+          <li class="nav-item u-pro">
+            <%= link_to t('devise.registrations.signup_btn'), new_user_registration_path, class:'nav-link waves-effect waves-dark' %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </nav>
+</header>
+<!-- ============================================================== -->
+<!-- End Topbar header -->
+
+<aside class="left-sidebar">
+  <!-- Sidebar scroll-->
+  <div class="scroll-sidebar">
+    <!-- Sidebar navigation-->
+    <nav class="sidebar-nav">
+      <ul id="sidebarnav">
+        <% if user_signed_in? %>
+          <li class="user-pro">
+            <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false">
+              <%= image_tag current_user.avatar_path, class: 'img-circle' %>
+              <span class="hide-menu"><%= current_user.email %></span>
+            </a>
+            <ul aria-expanded="false" class="collapse">
+              <li><a href="javascript:void(0)"><i class="ti-user"></i> My Profile</a></li>
+              <li><a href="javascript:void(0)"><i class="ti-settings"></i> Account Setting</a></li>
+              <%= link_to icon('fas', 'power-off', t('devise.sessions.signed_out_btn')), destroy_user_session_path %>
+            </ul>
+          </li>
+
+          <li>
+            <%= link_to icon('fas', 'tachometer-alt', t('admin.dashboard.title')), root_path, class: 'waves-effect waves-dark' %>
+          </li>
+
+          <li>
+            <%= link_to icon('fas', 'cogs', t('settings.edit.title')), 'javascript:void(0)', class: 'has-arrow waves-effect waves-dark' %>
+            <ul aria-expanded="false" class="collapse">
+              <li><%= link_to t('settings.edit.title'), edit_setting_path %></li>
+            </ul>
+          </li>
+        <% else %>
+
+        <% end %>
+      </ul>
+    </nav>
+    <!-- End Sidebar navigation -->
+  </div>
+  <!-- End Sidebar scroll-->
+</aside>

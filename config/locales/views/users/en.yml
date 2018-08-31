@@ -1,0 +1,41 @@
+en:
+  users:
+    sign_in:
+      title: 'Login/Registration'
+    index:
+      title: 'User List'
+    new:
+      title: 'New User'
+    create:
+      title: 'New User'
+    show:
+      title: 'User Profile'
+      tabs:
+        profile: "Profile"
+        achievements: 'Achievements'
+        messages: 'Messages'
+        notifications: 'Notifications'
+    edit:
+      title: 'Edit User'
+      info: 'Info'
+    update:
+      title: 'Edit User'
+  sessions:
+    new:
+      title: 'Login'
+    create:
+      title: 'Login'
+  registrations:
+    new:
+      title: 'Sign Up'
+    create:
+      title: 'Sign Up'
+  passwords:
+    new:
+      title: 'Password Recovery'
+    create:
+      title: 'Password Recovery'
+    edit:
+      title: 'Change Password'
+    update:
+      title: 'Change Password'

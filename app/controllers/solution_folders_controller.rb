@@ -1,0 +1,2 @@
+class SolutionFoldersController < ApplicationController
+end

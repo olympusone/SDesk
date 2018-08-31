@@ -1,0 +1,46 @@
+@import 'datatables/dataTables.bootstrap4';
+@import 'datatables/extensions/Responsive/responsive.bootstrap4';
+@import 'datatables/extensions/Buttons/buttons.bootstrap4';
+
+
+// optional remove '//=' to enable
+
+//@import 'datatables/extensions/AutoFill/autoFill.bootstrap';
+//@import 'datatables/extensions/Buttons/buttons.bootstrap';
+//@import 'datatables/extensions/ColReorder/colReorder.bootstrap';
+//@import 'datatables/extensions/FixedColumns/fixedColumns.bootstrap';
+//@import 'datatables/extensions/FixedHeader/fixedHeader.bootstrap';
+//@import 'datatables/extensions/KeyTable/keyTable.bootstrap';
+//@import 'datatables/extensions/Responsive/responsive.bootstrap';
+//@import 'datatables/extensions/RowGroup/rowGroup.bootstrap';
+//@import 'datatables/extensions/RowReorder/rowReorder.bootstrap';
+//@import 'datatables/extensions/Scroller/scroller.bootstrap';
+//@import 'datatables/extensions/Select/select.bootstrap';
+
+.dataTable{
+  .dt-options{
+    text-align: center;
+
+    .btn-sm{
+      width: 30px;
+      height: 30px;
+      line-height: 30px;
+      margin: 0;
+      padding: 0;
+    }
+  }
+}
+
+.dataTables_paginate{
+  .pagination{
+    float: right;
+  }
+}
+
+.dataTables_processing {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 10px 15px;
+}

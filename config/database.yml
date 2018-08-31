@@ -1,0 +1,19 @@
+default: &default
+  adapter: mysql2
+  encoding: utf8
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  username: root
+  password:
+  host: localhost
+  encoding: utf8
+
+development:
+  <<: *default
+  database: sdesk_development
+  password:
+
+production:
+  <<: *default
+  database: sdesk
+  username: sdesk
+  password: idu44K9X0oUT

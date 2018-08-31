@@ -1,0 +1,49 @@
+/*
+ *= require bootstrap-tagsinput/dist/bootstrap-tagsinput.css
+ *= require switchery
+ *= require sweetalert2/dist/sweetalert2
+ *= require select2/dist/css/select2.min
+ *= require morris.js/morris
+ *= require perfect-scrollbar.min
+ *= require toastr/toastr.scss
+*/
+
+@import 'bootstrap-datetimepicker.min';
+
+@import "cp/style";
+@import "cp/tabs";
+
+@import "font-awesome-sprockets";
+@import "font-awesome";
+@import "css-chart";
+
+@import 'datatables';
+@import 'common';
+
+//== Header
+.navbar-brand{
+  img{
+    height: 40px;
+  }
+}
+
+//== General
+.position-relative{
+  position: relative;
+}
+
+.bundle-image-flex{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.form-group{
+  position: relative;
+}
+
+.bootstrap-datetimepicker-widget{
+  position: absolute;
+  background: #fff;
+  z-index: 10;
+}

@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="<%= I18n.locale %>">
+<head>
+  <meta charset='utf-8'/>
+  <script>
+      var defaultLocale = "<%= I18n.default_locale %>";
+      var locale = "<%= I18n.locale %>";
+      var fallbacks = true;
+  </script>
+  <%= wicked_pdf_stylesheet_link_tag "pdf" %>
+  <%= wicked_pdf_javascript_include_tag "pdf" %>
+</head>
+<body id="pdf_template" onload="number_pages()">
+<div class="container-fluid">
+  <%= yield %>
+</div>
+</body>
+</html>

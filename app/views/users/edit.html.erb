@@ -1,0 +1,119 @@
+<%= header_btn(t("users.new.title"), new_user_path) %>
+
+<%= simple_nested_form_for setup_user(@user), html:{multipart: true} do |f| %>
+
+  <%= render 'shared/form_errors', resource: @user %>
+
+  <div class="row">
+    <div class="col-md-9">
+
+      <div class="card">
+        <ul class="nav nav-tabs customtab" role="tablist">
+          <li class="nav-item">
+            <a class="nav-link active show" data-toggle="tab" href="#tab1" role="tab" aria-selected="true">
+              <span class="hidden-sm-up"><%= icon 'fas', 'info-circle' %></span><span class="hidden-xs-down"><%= t('.info') %></span>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#tab2" role="tab" aria-selected="false">
+              <span class="hidden-sm-up"><%= icon 'fas', 'id-badge' %></span><span class="hidden-xs-down"><%= t('activerecord.models.identity.other') %></span>
+            </a>
+          </li>
+        </ul>
+
+        <div class="tab-content">
+          <div class="tab-pane active show" id="tab1" role="tabpanel">
+
+            <div class="p-20">
+              <%= f.input :email %>
+              <div class="row">
+                <%= f.input :password, wrapper_html: {class: "col-sm-6"} %>
+                <%= f.input :password_confirmation, wrapper_html: {class: "col-sm-6"} %>
+              </div>
+              <%= f.input :username %>
+
+
+              <hr>
+
+              <%= f.input :name %>
+              <%= f.input :lastname %>
+              <%= f.input :dob, as: :string, input_html: {class: 'date-picker'} %>
+              <%= f.input :gender, include_blank: :translate, input_html: {class: 'select2'} %>
+
+              <hr>
+              <%= f.input :country, include_blank: :translate, input_html: {class: 'select2'} %>
+              <%= f.input :timezone, as: :time_zone, include_blank: :translate, input_html: {class: 'select2'} %>
+            </div>
+
+          </div>
+
+          <div class="tab-pane p-20" id="tab2" role="tabpanel">
+            <div id="identities">
+              <%= f.simple_fields_for :identities, wrapper: false do |s| %>
+                <div class="fields row">
+                  <div class="col-sm-4">
+                    <% if s.object.persisted? %>
+                      <%= social_btn s.object.provider %>
+                    <% else %>
+                      <%= s.input :provider, label: false, include_blank: t('simple_form.include_blanks.user_identity.provider') , input_html: {class: 'select2'} %>
+                    <% end %>
+                  </div>
+                  <div class="col-sm-7">
+                    <%= s.input :uid, label: false %>
+                  </div>
+                  <div class="col-sm-1 text-center">
+                    <%= s.link_to_remove icon('fas', 'times'), class: "btn btn-sm btn-danger btn-circle" %>
+                  </div>
+                </div>
+              <% end %>
+            </div>
+
+            <div class="form-group">
+              <%= f.link_to_add :identities, class: "btn btn-info", data: {target: "#identities"} do %>
+                      <span>
+                        <%= icon('fas', 'plus') %>
+                        <span>Add</span>
+                      </span>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="card">
+        <div class="card-body">
+          <%= image_input f, f.object.avatar, lazy: true, width: 150, class: 'mx-auto d-block' %>
+          <%= f.input :role, include_blank: :translate, input_html:{class:'select2'} %>
+          <div class="form-group">
+            <%= f.input_field :confirmed, as: :boolean, class: "js-switch", data:{disabled: f.object.confirmed?} %>
+            <label><%= t "activerecord.attributes.user.confirmed" %></label>
+          </div>
+          <div class="form-group">
+            <%= f.input_field :locked, as: :boolean, class: "js-switch", data: {color: "#c0392b", jackSecondaryColor: "#e74c3c"} %>
+            <label><%= t "activerecord.attributes.user.locked" %></label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="m-b-10">
+    <%= f.button :submit, class: 'btn-info' %>
+    <%= cancel_btn(users_path) %>
+    <%= delete_btn(@user, class: 'float-md-right') %>
+  </div>
+<% end %>
+
+<% content_for :javascript_code do %>
+<script>
+  $(function () {
+      $("#user_username").keyup(function () {
+          var value = $(this).val().replace(/\s+/, '');
+          $(this).val(value);
+      })
+  });
+</script>
+<% end %>

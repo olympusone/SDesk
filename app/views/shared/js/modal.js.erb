@@ -1,0 +1,3 @@
+$('.modal').remove();
+$('body').prepend("<%= j render [defined?(directory) ? directory : controller_name, defined?(modal_name) ? modal_name : action_name].join('/') %>");
+$('.modal').modal();

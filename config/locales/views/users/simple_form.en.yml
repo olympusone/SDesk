@@ -1,0 +1,18 @@
+en:
+  helpers:
+    submit:
+      user:
+        create: 'Create'
+        update: 'Update'
+  simple_form:
+    placeholders:
+      identities:
+        uid: 'UID'
+    include_blanks:
+      user:
+        country: 'Select country..'
+        timezone: 'Select timezone..'
+        gender: 'Select gender..'
+        role: 'Select role..'
+      user_identity:
+        provider: 'Select provider..'

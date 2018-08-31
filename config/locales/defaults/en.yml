@@ -1,0 +1,44 @@
+en:
+  datatable:
+    edit: 'Edit'
+    delete: 'Delete'
+    actions: 'Actions'
+  nested_form:
+    add: 'Add'
+  number:
+    currency:
+      format:
+        format: "%n %u"
+        unit: "€"
+        precision: 3
+    precision:
+      format:
+        precision: 3
+    percentage:
+      format:
+        precision: 1
+  date:
+    formats:
+      default: "%d/%m/%Y"
+  time:
+    formats:
+      defaults: "%d/%m/%Y %H:%M"
+  locales:
+    en: 'English'
+  header:
+    profile: 'My Profile'
+  nav:
+    cms: 'CMS'
+  contact:
+    title: '<span class="text-main-1">Contact</span> With Us'
+    name: 'Name'
+    email: 'Email'
+    msg: 'Message'
+    send: 'Send'
+  confirmation:
+    delete: 'Proceed to delete?'
+  gamification:
+    title: 'Gamification'
+  flash_messages:
+    notice: 'Success!'
+    alert: 'Error!'

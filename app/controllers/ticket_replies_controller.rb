@@ -1,0 +1,2 @@
+class TicketRepliesController < ApplicationController
+end
