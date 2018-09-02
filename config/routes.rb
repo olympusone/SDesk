@@ -1,14 +1,4 @@
 Rails.application.routes.draw do
-  resources :solutions
-  resources :solution_folders
-  resources :solution_categories
-  resources :ticket_replies
-  resources :ticket_templates
-  resources :tickets
-  resources :requesters
-  resources :companies
-  resources :departments
-  resources :agents
   # Serve websocket cable requests in-process
   mount ActionCable.server => '/cable'
 
@@ -30,5 +20,19 @@ Rails.application.routes.draw do
 
     resources :users
     resource :setting
+
+    get '/knowledge-base', to: 'solutions#knowledge_base'
+    resources :solutions
+    resources :solution_folders
+    resources :solution_categories
+
+    resources :ticket_templates
+    resources :tickets, shallow: true do
+      resources :ticket_replies
+    end
+    resources :requesters
+    resources :companies
+    resources :departments
+    resources :agents
   end
 end

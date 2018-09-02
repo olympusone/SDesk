@@ -1,0 +1,10 @@
+en:
+  helpers:
+    submit:
+      ticket:
+        create: 'Submit'
+        update: 'Update'
+  simple_form:
+    include_blanks:
+      ticket:
+        department: 'Select Department..'

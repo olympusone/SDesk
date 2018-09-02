@@ -1,0 +1,29 @@
+<div class="container m-t-40 m-b-40">
+  <div class="row justify-content-center align-items-center">
+
+    <div class="col-sm-4">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title text-center"><%= t 'devise.sessions.title' %></h4>
+
+          <%= render 'shared/form_errors', resource: resource %>
+
+          <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+            <%= f.input :email, required: true, autofocus: true %>
+            <%= f.input :password, required: true %>
+            <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
+
+            <hr>
+            <%= f.button :submit, t('devise.sessions.sign_in_btn'), class: 'btn-block' %>
+          <% end %>
+
+          <div class="text-center m-t-10">
+            <div><%= link_to t('devise.passwords.forgot_title'), new_user_password_path %></div>
+            <div><%= link_to t('devise.registrations.title'), new_user_registration_path %></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

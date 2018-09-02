@@ -1,8 +1,15 @@
 class Ticket < ApplicationRecord
   extend Enumerize
 
-  enumerize :priority, in: {low: 1, medium: 2, high: 3}, default: :low
-  enumerize :state, in: {waiting: 1, completed: 2}, default: :waiting
+  has_many_attached :attachments
+
+  PRIORITY = {low: 1, medium: 2, high: 3}
+  STATE = {open: 1, pending: 2, closed: 3}
+
+  enumerize :priority, in: PRIORITY, default: :low
+  enumerize :state, in: STATE, default: :open
+
+  attr_accessor :email
 
   validates_presence_of :subject, :description
 

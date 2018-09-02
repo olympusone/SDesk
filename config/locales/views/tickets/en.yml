@@ -1,0 +1,14 @@
+en:
+  tickets:
+    index:
+      title: 'Ticket List'
+    new:
+      title: 'New Ticket'
+    create:
+      title: 'New Ticket'
+    show:
+      title: 'Ticket Preview'
+    edit:
+      title: 'Edit Ticket'
+    update:
+      title: 'Edit Ticket'

@@ -1,0 +1,22 @@
+<div id="solutionCategoryModal" class="modal" role="dialog" aria-labelledby="solutionCategoryModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="solutionCategoryModal"><%= t 'activerecord.models.solution_category.one' %></h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+      </div>
+      <%= simple_nested_form_for @social, remote: true do |f| %>
+        <div class="modal-body">
+          <%= f.input :name %>
+          <%= f.input :description %>
+        </div>
+        <div class="modal-footer">
+          <%= f.button :submit, class: 'btn-info' %>
+          <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Close</button>
+        </div>
+      <% end %>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>

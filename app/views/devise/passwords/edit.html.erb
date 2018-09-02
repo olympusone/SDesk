@@ -1,0 +1,47 @@
+<div class="nk-gap-2"></div>
+
+<div class="container">
+
+  <h2><%= t 'devise.passwords.change_title' %></h2>
+  <div class="row">
+    <div class="col-md-8">
+      <%= render 'shared/form_errors', resource: resource %>
+
+      <div class="nk-box-1 bg-dark-2">
+        <%= simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
+
+          <%= f.input :reset_password_token, as: :hidden %>
+          <%= f.full_error :confirmation_token %>
+
+          <div class="row">
+            <%= f.input :password, label: "New password", required: true, autofocus: true, wrapper_html:{class:'col-sm-6'} %>
+            <%= f.input :password_confirmation, label: "Confirm your new password", required: true, wrapper_html:{class:'col-sm-6'} %>
+          </div>
+
+          <%= f.button :submit, t('devise.passwords.change_btn') %>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="nk-box-1 bg-dark-2">
+        <%= t 'devise.sessions.social_text' %>
+
+        <div class="nk-gap"></div>
+
+        <%= render 'devise/shared/social_links' %>
+
+        <div class="nk-gap-1"></div>
+
+        <hr class="bg-danger">
+
+        <div class="text-center">
+          <div><%= link_to t('devise.sessions.title'), new_user_session_path %></div>
+          <div><%= link_to t('devise.registrations.title'), new_user_registration_path %></div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</div>

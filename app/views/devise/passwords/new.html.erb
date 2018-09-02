@@ -1,0 +1,27 @@
+<div class="container m-t-40 m-b-40">
+  <div class="row justify-content-center align-items-center">
+
+    <div class="col-sm-4">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title text-center"><%= t 'devise.passwords.forgot_title' %></h4>
+
+          <%= render 'shared/form_errors', resource: resource %>
+
+          <%= simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: {method: :post}) do |f| %>
+            <%= f.input :email, required: true, autofocus: true %>
+
+            <hr>
+            <%= f.button :submit, t('devise.passwords.forgot_btn'), class: 'btn-block' %>
+          <% end %>
+
+          <div class="text-center m-t-10">
+            <div><%= link_to t('devise.sessions.title'), new_user_session_path %></div>
+            <div><%= link_to t('devise.registrations.title'), new_user_registration_path %></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

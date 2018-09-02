@@ -92,13 +92,33 @@
           </li>
 
           <li>
+            <%= link_to icon('fas', 'tachometer-alt', t('activerecord.models.ticket.other')), tickets_path, class: 'waves-effect waves-dark' %>
+          </li>
+
+          <li>
+            <%= link_to icon('fas', 'cogs', t('solutions.knowledge_base.index')), 'javascript:void(0)', class: 'has-arrow waves-effect waves-dark' %>
+            <ul aria-expanded="false" class="collapse">
+              <li><%= link_to t('activerecord.models.solution_category.other'), solution_categories_path %></li>
+              <li><%= link_to t('activerecord.models.solution_folder.other'), solution_folders_path %></li>
+              <li><%= link_to t('activerecord.models.solution.other'), solutions_path %></li>
+            </ul>
+          </li>
+
+          <li>
             <%= link_to icon('fas', 'cogs', t('settings.edit.title')), 'javascript:void(0)', class: 'has-arrow waves-effect waves-dark' %>
             <ul aria-expanded="false" class="collapse">
               <li><%= link_to t('settings.edit.title'), edit_setting_path %></li>
+              <li><%= link_to t('activerecord.models.ticket_template.other'), ticket_templates_path %></li>
+              <li><%= link_to t('activerecord.models.agent.other'), agents_path %></li>
             </ul>
           </li>
         <% else %>
-
+          <li>
+            <%= link_to icon('fas', 'ticket-alt', t('tickets.new.title')), new_ticket_path, class: 'waves-effect waves-dark' %>
+          </li>
+          <li>
+            <%= link_to icon('fas', 'book', t('solutions.knowledge_base.index')), knowledge_base_path, class: 'waves-effect waves-dark' %>
+          </li>
         <% end %>
       </ul>
     </nav>

@@ -1,0 +1,6 @@
+en:
+  helpers:
+    submit:
+      solution_folder:
+        create: 'Create'
+        update: 'Update'

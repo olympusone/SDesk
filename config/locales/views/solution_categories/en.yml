@@ -1,0 +1,14 @@
+en:
+  solution_categories:
+    index:
+      title: 'Solution Category List'
+    new:
+      title: 'New Solution Category'
+    create:
+      title: 'New Solution Category'
+    show:
+      title: 'Solution Category'
+    edit:
+      title: 'Edit Solution Category'
+    update:
+      title: 'Edit Solution Category'

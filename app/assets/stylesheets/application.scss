@@ -7,42 +7,47 @@
  *= require perfect-scrollbar.min
  *= require toastr/toastr.scss
 */
-
 @import 'bootstrap-datetimepicker.min';
-
 @import "cp/style";
 @import "cp/tabs";
-
 @import "font-awesome-sprockets";
 @import "font-awesome";
 @import "css-chart";
-
 @import 'datatables';
 @import 'common';
 
+body.sessions,
+body.registrations,
+body.passwords
+{
+  .page-titles {
+    display: none;
+  }
+}
+
 //== Header
-.navbar-brand{
-  img{
+.navbar-brand {
+  img {
     height: 40px;
   }
 }
 
 //== General
-.position-relative{
+.position-relative {
   position: relative;
 }
 
-.bundle-image-flex{
+.bundle-image-flex {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.form-group{
+.form-group {
   position: relative;
 }
 
-.bootstrap-datetimepicker-widget{
+.bootstrap-datetimepicker-widget {
   position: absolute;
   background: #fff;
   z-index: 10;

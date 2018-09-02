@@ -19,7 +19,9 @@ class User < ApplicationRecord
   belongs_to :user, polymorphic: true
 
   def role?(role)
-    # self.role_value.to_i == ROLES[role.to_sym].to_i && ROLES.key?(role.to_sym)
+    _role = role.to_s.classify
+
+    _role == self.user_type && _role.in?(%w[Agent Requester])
   end
 
   # return url for user avatar, else default image

@@ -1,0 +1,16 @@
+en:
+  solutions:
+    knowledge_base:
+      index: 'Knowledge Base'
+    index:
+      title: 'Solution List'
+    new:
+      title: 'New Solution'
+    create:
+      title: 'New Solution'
+    show:
+      title: 'Solution Preview'
+    edit:
+      title: 'Edit Solution'
+    update:
+      title: 'Edit Solution'

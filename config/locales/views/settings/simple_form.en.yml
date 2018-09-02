@@ -1,0 +1,6 @@
+en:
+  helpers:
+    submit:
+      setting:
+        create: 'Submit'
+        update: 'Update'

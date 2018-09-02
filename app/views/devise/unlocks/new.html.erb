@@ -1,0 +1,26 @@
+<div class="container">
+  <h2><%= t 'devise.unlocks.title' %></h2>
+  <div class="row">
+    <div class="col-md-8">
+      <%= render 'shared/form_errors', resource: resource %>
+
+      <%= simple_form_for(resource, as: resource_name, url: unlock_path(resource_name), html: {method: :post}) do |f| %>
+        <%= f.error_notification %>
+        <%= f.full_error :unlock_token %>
+
+        <div class="form-inputs">
+          <%= f.input :email, required: true, autofocus: true %>
+        </div>
+
+        <div class="form-actions">
+          <%= f.button :submit, t('devise.unlocks.btn') %>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="col-md-4">
+      <%= render "devise/shared/links" %>
+    </div>
+
+  </div>
+</div>

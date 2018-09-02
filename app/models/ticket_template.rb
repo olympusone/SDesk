@@ -1,8 +1,8 @@
 class TicketTemplate < ApplicationRecord
   extend Enumerize
 
-  enumerize :priority, in: {low: 1, medium: 2, high: 3}, default: :low
-  enumerize :state, in: {waiting: 1, completed: 2}, default: :waiting
+  enumerize :priority, in: Ticket::PRIORITY, default: :low
+  enumerize :state, in: Ticket::STATE, default: :waiting
 
   validates :name, presence: true, uniqueness: {case_sensitive: false}
   validates_presence_of :subject, :description

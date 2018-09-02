@@ -1,0 +1,30 @@
+<%= simple_nested_form_for @ticket, html:{multipart: true} do |f| %>
+
+  <%= render 'shared/form_errors', resource: @ticket %>
+
+  <div class="row">
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-body">
+          <%= f.input :email, required: true %>
+          <%= f.input :subject %>
+          <%= f.association :department, include_blank: :translate, input_html:{class:'select2'} %>
+          <%= f.input :description %>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-body">
+          <%= f.input :attachments, input_html:{multiple: true} %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="m-b-10">
+    <%= f.button :submit, class: 'btn-info' %>
+    <%= cancel_btn(root_path) %>
+  </div>
+<% end %>

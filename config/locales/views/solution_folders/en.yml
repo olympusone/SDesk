@@ -1,0 +1,14 @@
+en:
+  solution_folders:
+    index:
+      title: 'Solution Folder List'
+    new:
+      title: 'New Solution Folder'
+    create:
+      title: 'New Solution Folder'
+    show:
+      title: 'Solution Folder'
+    edit:
+      title: 'Edit Solution Folder'
+    update:
+      title: 'Edit Solution Folder'
