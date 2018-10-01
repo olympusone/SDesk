@@ -28,7 +28,7 @@ class AgentDatatable < AjaxDatatablesRails::Base
       {
           name: link_to(record.name, record),
           lastname: link_to(record.lastname, record),
-          department: record.department.name,
+          department: record.department.try(:name),
           email: record.user.email,
           state: state.join(" ").html_safe,
           actions: _actions,
