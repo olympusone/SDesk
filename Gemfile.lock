@@ -97,7 +97,6 @@ GEM
       execjs
     coffee-script-source (1.12.2)
     concurrent-ruby (1.0.5)
-    connection_pool (2.2.2)
     crass (1.0.4)
     debug_inspector (0.0.3)
     devise (4.5.0)
@@ -185,8 +184,6 @@ GEM
     rack (2.0.5)
     rack-accept (0.4.5)
       rack (>= 0.4)
-    rack-protection (2.0.3)
-      rack
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
     rails (5.2.1)
@@ -240,10 +237,6 @@ GEM
     sassc (1.12.1)
       ffi (~> 1.9.6)
       sass (>= 3.3.0)
-    sidekiq (5.2.1)
-      connection_pool (~> 2.2, >= 2.2.2)
-      rack-protection (>= 1.5.0)
-      redis (>= 3.3.5, < 5)
     simple_form (4.0.1)
       actionpack (>= 5.0)
       activemodel (>= 5.0)
@@ -335,7 +328,6 @@ DEPENDENCIES
   redactor-rails!
   redis (~> 4.0)
   sass-rails (~> 5.0)
-  sidekiq
   simple_form
   sort_alphabetical
   switchery-rails

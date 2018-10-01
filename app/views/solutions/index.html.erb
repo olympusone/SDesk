@@ -1,0 +1,33 @@
+<%= header_btn(t("solutions.new.title"), new_solution_path) if can?(:create, Solution) %>
+
+<div class="card">
+  <div class="card-body">
+    <table id="solutions_datatable" class="display nowrap table table-hover dataTable" data-source="<%= solutions_path(format: :json) %>">
+      <thead>
+      <tr>
+        <th><%= t 'activerecord.attributes.solution.title' %></th>
+        <th><%= t 'activerecord.models.solution_folder.other' %></th>
+        <th class="dt-options"></th>
+      </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+
+<% content_for :javascript_code do %>
+  <script>
+      var params = {
+          columns: [
+              {data: 'title'},
+              {data: 'solution_folder'},
+              {data: 'actions'},
+          ]
+      };
+
+      initDatatable($('#solutions_datatable'), params);
+  </script>
+<% end %>

@@ -4,6 +4,7 @@
   "dependencies": {
     "bootstrap-tagsinput": "^0.7.1",
     "fastclick": "^1.0.6",
+    "icheck": "^1.0.2",
     "ionicons": "^4.3.0",
     "lazyload": "^2.0.0-beta.2",
     "morris.js": "^0.5.0",

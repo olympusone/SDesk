@@ -1,0 +1,14 @@
+en:
+  companies:
+    index:
+      title: 'Company List'
+    new:
+      title: 'New Company'
+    create:
+      title: 'New Company'
+    show:
+      title: 'Show Company'
+    edit:
+      title: 'Edit Company'
+    update:
+      title: 'Edit Company'

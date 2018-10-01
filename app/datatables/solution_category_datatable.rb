@@ -13,8 +13,8 @@ class SolutionCategoryDatatable < AjaxDatatablesRails::Base
   def data
     records.map do |record|
       {
-          name: record.name,
-          actions: actions = table_actions(record, :edit, destroy: {remote: true}),
+          name: link_to(record.name, record),
+          actions: table_actions(record, edit:{remote: true}, destroy: {remote: true}),
           DT_RowId: record.id
       }
     end

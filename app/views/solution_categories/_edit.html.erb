@@ -5,7 +5,7 @@
         <h4 class="modal-title" id="solutionCategoryModal"><%= t 'activerecord.models.solution_category.one' %></h4>
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
       </div>
-      <%= simple_nested_form_for @social, remote: true do |f| %>
+      <%= simple_nested_form_for @solution_category, remote: true do |f| %>
         <div class="modal-body">
           <%= f.input :name %>
           <%= f.input :description %>

@@ -3,7 +3,7 @@
 //= require jquery3
 //= require cable
 
-//= require jquery_ujs
+//= require underscore/underscore-min
 //= require popper
 //= require bootstrap-sprockets
 //= require js-routes
@@ -15,6 +15,7 @@
 //= require bootstrap-datetimepicker
 //= require tinymce
 //= require switchery
+//= require icheck/icheck.min
 //= require sortable
 
 //= require bootstrap-tagsinput/dist/bootstrap-tagsinput.min
@@ -38,7 +39,6 @@
 //= require common
 
 $(function () {
-    $('.colorpicker').asColorPicker();
     initSwitchers();
 
     // trim all inputs that refers to slug

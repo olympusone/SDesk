@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_31_210820) do
+ActiveRecord::Schema.define(version: 2018_09_30_221750) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -33,6 +33,14 @@ ActiveRecord::Schema.define(version: 2018_08_31_210820) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
+  create_table "admins", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "name"
+    t.string "lastname"
+    t.string "title"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "agents", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
     t.string "lastname"
@@ -49,6 +57,8 @@ ActiveRecord::Schema.define(version: 2018_08_31_210820) do
     t.float "lng"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "domain"
+    t.text "notes"
   end
 
   create_table "departments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -64,7 +74,19 @@ ActiveRecord::Schema.define(version: 2018_08_31_210820) do
     t.bigint "company_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "title"
+    t.text "notes"
     t.index ["company_id"], name: "index_requesters_on_company_id"
+  end
+
+  create_table "settings", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "var", null: false
+    t.text "value"
+    t.integer "thing_id"
+    t.string "thing_type", limit: 30
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["thing_type", "thing_id", "var"], name: "index_settings_on_thing_type_and_thing_id_and_var", unique: true
   end
 
   create_table "solution_categories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -114,6 +136,10 @@ ActiveRecord::Schema.define(version: 2018_08_31_210820) do
     t.string "tags"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "department_id"
+    t.bigint "agent_id"
+    t.index ["agent_id"], name: "index_ticket_templates_on_agent_id"
+    t.index ["department_id"], name: "index_ticket_templates_on_department_id"
   end
 
   create_table "tickets", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|

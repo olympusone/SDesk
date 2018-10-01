@@ -1,0 +1,14 @@
+en:
+  ticket_replies:
+    index:
+      title: 'Ticket Reply List'
+    new:
+      title: 'New Ticket Reply'
+    create:
+      title: 'New Ticket Reply'
+    show:
+      title: 'Show Ticket Reply'
+    edit:
+      title: 'Edit Ticket Reply'
+    update:
+      title: 'Edit Ticket Reply'

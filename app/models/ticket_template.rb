@@ -2,7 +2,7 @@ class TicketTemplate < ApplicationRecord
   extend Enumerize
 
   enumerize :priority, in: Ticket::PRIORITY, default: :low
-  enumerize :state, in: Ticket::STATE, default: :waiting
+  enumerize :state, in: Ticket::STATE, default: :open
 
   validates :name, presence: true, uniqueness: {case_sensitive: false}
   validates_presence_of :subject, :description

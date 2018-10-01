@@ -1,0 +1,18 @@
+en:
+  activerecord:
+    models:
+      admin:
+        one: 'Admin'
+        other: 'Admins'
+    attributes:
+      admin:
+        name: 'Name'
+        lastname: 'Lastname'
+  admins:
+    create:
+      success: 'Admin <b>%{value}</b> created successfully'
+    update:
+      success: 'Admin <b>%{value}</b> updated successfully'
+    destroy:
+      success: 'Admin <b>%{value}</b> deleted successfully'
+      error: 'Admin <b>%{value}</b> is not deleted'

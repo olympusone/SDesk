@@ -1,0 +1,20 @@
+<%= header_btn(t("solutions.new.title"), new_solution_path) if can?(:create, Solution) %>
+
+<%= simple_nested_form_for @solution, html:{multipart: true} do |f| %>
+
+  <%= render 'shared/form_errors', resource: @solution %>
+
+  <div class="card">
+    <div class="card-body">
+      <%= f.input :title %>
+      <%= f.association :solution_folder, include_blank: :translate, input_html: {class: 'select2'} %>
+      <%= f.input :tags, input_html:{class:'tagsinput'} %>
+      <%= f.input :content, input_html:{class:'tinymce'} %>
+    </div>
+  </div>
+
+  <div class="m-b-10">
+    <%= f.button :submit, class: 'btn-info' %>
+    <%= cancel_btn(solutions_path) %>
+  </div>
+<% end %>

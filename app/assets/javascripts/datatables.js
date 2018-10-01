@@ -23,10 +23,10 @@
 
 //= require datatables/extensions/Responsive/dataTables.responsive
 //= require datatables/extensions/Responsive/responsive.bootstrap4
-//= require datatables/extensions/Buttons/dataTables.buttons
-//= require datatables/extensions/Buttons/buttons.html5
-//= require datatables/extensions/Buttons/buttons.print
-//= require datatables/extensions/Buttons/buttons.bootstrap4
+// require datatables/extensions/Buttons/dataTables.buttons
+// require datatables/extensions/Buttons/buttons.html5
+// require datatables/extensions/Buttons/buttons.print
+// require datatables/extensions/Buttons/buttons.bootstrap4
 
 //https://github.com/DataTables/DataTablesSrc/blob/master/js/ext/ext.classes.js#L7
 $.extend( $.fn.dataTableExt.oStdClasses, {
@@ -39,7 +39,7 @@ window.datatables = window.datatables || {};
 
 function setDatatableLocale(currentLocale) {
     if (typeof currentLocale === 'undefined') {
-        currentLocale = I18n.locale;
+        currentLocale = 'el';
     }
 
     switch (currentLocale) {
@@ -73,7 +73,7 @@ function setDatatableLocale(currentLocale) {
         case 'el':
             return {
                 "sDecimal": ",",
-                "sEmptyTable": "Δεν υπάρχουν δεδομένα στον πίνακα",
+                "sEmptyTable": "Παρακαλώ συμπληρώστε τα κριτήρια σας",
                 "sInfo": "Εμφανίζονται _START_ έως _END_ από _TOTAL_ εγγραφές",
                 "sInfoEmpty": "Εμφανίζονται 0 έως 0 από 0 εγγραφές",
                 "sInfoFiltered": "(φιλτραρισμένες από _MAX_ συνολικά εγγραφές)",
@@ -82,16 +82,16 @@ function setDatatableLocale(currentLocale) {
                 "sLengthMenu": "Δείξε _MENU_ εγγραφές",
                 "sLoadingRecords": "Φόρτωση...",
                 "sProcessing": "Επεξεργασία...",
-                "sSearch": "Αναζήτηση:",
+                "sSearch": "_INPUT_",
                 "sSearchPlaceholder": "Αναζήτηση",
                 "sThousands": ".",
                 "sUrl": "",
                 "sZeroRecords": "Δεν βρέθηκαν εγγραφές που να ταιριάζουν",
                 "oPaginate": {
-                    "sFirst": "Πρώτη",
-                    "sPrevious": "Προηγούμενη",
-                    "sNext": "Επόμενη",
-                    "sLast": "Τελευταία"
+                    "sFirst": "<i class='fas fa-angle-double-left'></i>",
+                    "sLast": "<i class='fas fa-angle-double-right'></i>",
+                    "sNext": "<i class='fas fa-angle-right'></i>",
+                    "sPrevious": "<i class='fas fa-angle-left'></i>"
                 },
                 "oAria": {
                     "sSortAscending": ": ενεργοποιήστε για αύξουσα ταξινόμηση της στήλης",
@@ -103,15 +103,18 @@ function setDatatableLocale(currentLocale) {
 }
 
 function initDatatable(_table, params) {
-    var table_id = _table.attr('id');
+    let table_id = _table.attr('id');
 
-    var dom = "<'row'<'col-sm-12 col-md-6'l><'col-sm-12 col-md-6'f>>" +
+    let dom = "<'row'<'col-sm-12 col-md-6'l><'col-sm-12 col-md-6'f>>" +
         "<'table-responsive'tr>" +
         "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>";
-    var columns = [];
-    var method = 'GET';
-    var processing = true;
-    var serverSide = true;
+    let columns = [];
+    let data = [];
+    let method = 'GET';
+    let processing = true;
+    let serverSide = true;
+    let additionalData = null;
+    let createdRow = null;
 
     if (typeof params !== 'undefined') {
         if (params.columns) {
@@ -133,10 +136,22 @@ function initDatatable(_table, params) {
         if (typeof params.serverSide !== 'undefined') {
             serverSide = params.serverSide;
         }
+
+        if(typeof params.data !== 'undefined'){
+            data = params.data;
+        }
+
+        if(typeof params.additionalData !== 'undefined'){
+            additionalData = params.additionalData;
+        }
+
+        if(typeof params.createdRow !== 'undefined'){
+            createdRow = params.createdRow;
+        }
     }
 
-    var options = {
-        language: setDatatableLocale(locale),
+    let options = {
+        language: setDatatableLocale('el'),
         processing: processing,
         serverSide: false,
         responsive: true,
@@ -145,11 +160,10 @@ function initDatatable(_table, params) {
         autoWidth: false,
         columns: columns,
         lengthMenu: [[10, 25, 50, 100, -1], [10, 25, 50, 100, 'All']],
-        pageLength: 25,
+        pageLength: 10,
         order: [],
         columnDefs: [
-            {targets: 'no-sort', orderable: false},
-            {targets: 'no-search', searchable: false},
+            {targets: 'currency', class: 'text-center text-nowrap'},
             {targets: 'text-center', class: 'text-center'},
             {targets: 'text-right', class: 'text-right'},
             {targets: 'dt-options', class: 'dt-options', orderable: false, searchable: false},
@@ -160,168 +174,25 @@ function initDatatable(_table, params) {
     if(serverSide){
         options.ajax = {
             type: method,
-            url: _table.data('source')
+            url: _table.data('source'),
         };
+
+        if(!_.isEmpty(additionalData)){
+            options.ajax.data = additionalData;
+        }
 
         options.serverSide = true;
     }
 
-    window.datatables[table_id] = _table.dataTable(options);
-}
+    if(!_.isEmpty(data)){
+        options.data = data;
+    }
 
-// function initDataTable(_table, params){
-//     _table = typeof _table === 'string' ? $(_table) : _table;
-//
-//     var table_id = _table.attr('id');
-//     var method = _table.data('method') ? _table.data('method') : 'get';
-//     var dom = _table.data('dom') ? _table.data('dom') : "<'row'<'col-sm-6'l><'col-sm-6'>><'table-responsive'tr><'row'<'col-sm-5'i><'col-sm-7'p>>";
-//
-//     var options = {
-//         language: setDatatableLocale(locale),
-//         dom: dom,
-//         processing: true,
-//         serverSide: true,
-//         responsive: true,
-//         ajax: {
-//             type: method,
-//             url: _table.data('source')
-//         },
-//         pagingType: "full_numbers",
-//         autoWidth: false,
-//         lengthMenu: [[10, 25, 50, 100, -1], [10, 25, 50, 100, 'All']],
-//         pageLength: 25,
-//         order: [],
-//         columnDefs: [
-//             {targets: 'no-sort', orderable: false},
-//             {targets: 'no-search', searchable: false},
-//             {targets: 'text-center', class: 'text-center'},
-//             {targets: 'text-right', class: 'text-right'},
-//             {targets: 'dt-options', class: 'dt-options', orderable: false, searchable: false},
-//             {targets: 'hidden', class: 'hidden'}
-//         ]
-//     };
-//
-//     if(typeof params !== 'undefined'){
-//         $.each(params, function (key, value) {
-//             options[key] = value;
-//         });
-//     }
-//
-//     window.datatables[table_id] = _table.dataTable(options);
-//
-//     // FIXME on multiple tables on same page, work as one
-//     _table.parents('.dataTables_wrapper').find(".dataTables_filter input").unbind().bind('keydown', function(e){
-//         if(e.keyCode === 13){
-//             e.preventDefault();
-//
-//             window.datatables[table_id].search($(this).val()).draw();
-//         }
-//     });
-//
-//     // Setup - add a text input to each footer cell
-//     _table.find('.search-columns th:not(.no-search, .dt-options)').each( function () {
-//         if(!$(this).hasClass('select_option')){
-//             var width = $(this).data('width') ? 'width:' + $(this).data('width') : '';
-//             var _class = '';
-//
-//             if($(this).hasClass('address_country')){
-//                 _class = 'address_country';
-//             }else if($(this).hasClass('address_city')){
-//                 _class = 'address_city';
-//             }else if($(this).hasClass('address_location')){
-//                 _class = 'address_location';
-//             }
-//
-//             $(this).html( '<input class="form-control input-sm '+ _class +'" type="text" style="'+width+'">' );
-//         }
-//     });
-//
-//     // Apply the search
-//     window.datatables[table_id].columns().every( function () {
-//         var that = this;
-//
-//         $( 'input, select', this.footer() ).on( 'keydown change', function (e) {
-//             if(e.keyCode === 13){
-//                 e.preventDefault();
-//
-//                 that.search( this.value ).draw();
-//             }
-//         } );
-//     } );
-// }
-//
-// function simpleDataTable(_table, params){
-//     _table = typeof _table === 'string' ? $(_table) : _table;
-//
-//     if(!$.fn.DataTable.isDataTable(_table)){
-//         var table_id = _table.attr('id');
-//         var dom = _table.data('dom') ? _table.data('dom') : "<'row'<'col-sm-6'l><'col-sm-6'>><'table-responsive'tr><'row'<'col-sm-5'i><'col-sm-7'p>>";
-//
-//         var options = {
-//             language: setDatatableLocale(locale),
-//             dom: dom,
-//             responsive: true,
-//             processing: true,
-//             serverSide: false,
-//             autoWidth: false,
-//             lengthMenu: [[10, 25, 50, 100, -1], [10, 25, 50, 100, 'All']],
-//             pageLength: 25,
-//             order: [],
-//             columnDefs: [
-//                 {targets: 'no-sort', orderable: false},
-//                 {targets: 'no-search', searchable: false},
-//                 {targets: 'text-center', class: 'text-center'},
-//                 {targets: 'text-right', class: 'text-right'},
-//                 {targets: 'dt-options', class: 'dt-options', orderable: false, searchable: false},
-//                 {targets: 'hidden', class: 'hidden'}
-//             ]
-//         };
-//
-//         if(typeof params !== 'undefined'){
-//             $.each(params, function (key, value) {
-//                 options[key] = value;
-//             });
-//         }
-//
-//         window.datatables[table_id] = _table.dataTable(options);
-//
-//         _table.parents('.dataTables_wrapper').find(".dataTables_filter input").unbind().bind('keydown', function(e){
-//             if(e.keyCode === 13){
-//                 e.preventDefault();
-//
-//                 window.datatables[table_id].search($(this).val()).draw();
-//             }
-//         });
-//
-//         // Setup - add a text input to each footer cell
-//         _table.find('.search-columns th:not(.no-search, .dt-options)').each( function () {
-//             if(!$(this).hasClass('select_option')){
-//                 var width = $(this).data('width') ? 'width:' + $(this).data('width') : '';
-//                 var _class = '';
-//
-//                 if($(this).hasClass('address_country')){
-//                     _class = 'address_country';
-//                 }else if($(this).hasClass('address_city')){
-//                     _class = 'address_city';
-//                 }else if($(this).hasClass('address_location')){
-//                     _class = 'address_location';
-//                 }
-//
-//                 $(this).html( '<input class="form-control input-sm ' + _class + '" type="text" style="'+width+'">' );
-//             }
-//         });
-//
-//         // Apply the search
-//         window.datatables[table_id].columns().every( function () {
-//             var that = this;
-//
-//             $( 'input, select', this.footer() ).on( 'keydown change', function (e) {
-//                 if(e.keyCode === 13){
-//                     e.preventDefault();
-//
-//                     that.search( this.value ).draw();
-//                 }
-//             } );
-//         } );
-//     }
-// }
+    // TODO
+    // if(!_.isEmpty(createdRow)){
+    //     console.log('fds');
+    //     options.createdRow = createdRow;
+    // }
+
+    window.datatables[table_id] = _table.DataTable(options);
+}

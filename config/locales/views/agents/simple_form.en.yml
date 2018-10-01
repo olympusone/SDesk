@@ -1,0 +1,6 @@
+en:
+  helpers:
+    submit:
+      agent:
+        create: 'Create'
+        update: 'Update'

@@ -1,0 +1,16 @@
+en:
+  admins:
+    dashboard:
+      title: 'Dashboard'
+    index:
+      title: 'Admin List'
+    new:
+      title: 'New Admin'
+    create:
+      title: 'New Admin'
+    show:
+      title: 'Show Admin'
+    edit:
+      title: 'Edit Admin'
+    update:
+      title: 'Edit Admin'

@@ -1,0 +1,37 @@
+<%= header_btn(t("admins.new.title"), new_admin_path) if can?(:create, Admin) %>
+
+<div class="card">
+  <div class="card-body">
+    <table id="admins_datatable" class="display table table-hover dataTable" data-source="<%= admins_path(format: :json) %>">
+      <thead>
+      <tr>
+        <th><%= t 'activerecord.attributes.admin.name' %></th>
+        <th><%= t 'activerecord.attributes.admin.lastname' %></th>
+        <th><%= t 'activerecord.attributes.user.email' %></th>
+        <th><%= t 'activerecord.attributes.user.state' %></th>
+        <th class="dt-options"></th>
+      </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+
+<% content_for :javascript_code do %>
+  <script>
+      var params = {
+          columns: [
+              {data: 'name'},
+              {data: 'lastname'},
+              {data: 'email'},
+              {data: 'state'},
+              {data: 'actions'},
+          ]
+      };
+
+      initDatatable($('#admins_datatable'), params);
+  </script>
+<% end %>

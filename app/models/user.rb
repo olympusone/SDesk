@@ -21,7 +21,7 @@ class User < ApplicationRecord
   def role?(role)
     _role = role.to_s.classify
 
-    _role == self.user_type && _role.in?(%w[Agent Requester])
+    _role == self.user_type && _role.in?(%w[Admin Agent Requester])
   end
 
   # return url for user avatar, else default image

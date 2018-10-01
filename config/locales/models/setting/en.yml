@@ -1,0 +1,17 @@
+en:
+  activerecord:
+    models:
+      setting:
+        one: 'Setting'
+        other: 'Setting'
+    attributes:
+      setting:
+        company_name: 'Company Name'
+        location_address: 'Company Address'
+        company_phone: 'Company Phone'
+        company_email: 'Company Email'
+  settings:
+    create:
+      success: 'Setting successfully saved'
+    update:
+      success: 'Setting is not updated'

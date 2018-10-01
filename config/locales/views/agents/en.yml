@@ -1,0 +1,14 @@
+en:
+  agents:
+    index:
+      title: 'Agent List'
+    new:
+      title: 'New Agent'
+    create:
+      title: 'New Agent'
+    show:
+      title: 'Show Agent'
+    edit:
+      title: 'Edit Agent'
+    update:
+      title: 'Edit Agent'

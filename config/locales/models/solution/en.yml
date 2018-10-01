@@ -6,7 +6,10 @@ en:
         other: 'Solutions'
     attributes:
       solution:
-        id: 'ID'
+        title: 'Title'
+        content: 'Content'
+        tags: 'Tags'
+        solution_folder_id: 'Solution Folder'
   solutions:
     create:
       success: 'Solution <b>%{value}</b> created successfully'

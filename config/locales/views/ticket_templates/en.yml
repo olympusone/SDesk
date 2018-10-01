@@ -1,0 +1,14 @@
+en:
+  ticket_templates:
+    index:
+      title: 'Ticket Template List'
+    new:
+      title: 'New Ticket Template'
+    create:
+      title: 'New Ticket Template'
+    show:
+      title: 'Show Ticket Template'
+    edit:
+      title: 'Edit Ticket Template'
+    update:
+      title: 'Edit Ticket Template'

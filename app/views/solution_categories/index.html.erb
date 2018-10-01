@@ -1,4 +1,4 @@
-<%= header_btn(t("solution_categories.new.title"), new_solution_category_path, remote: true) %>
+<%= header_btn(t("solution_categories.new.title"), new_solution_category_path, remote: true) if can?(:create, SolutionCategory) %>
 
 <div class="card">
   <div class="card-body">

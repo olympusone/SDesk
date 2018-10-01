@@ -1,0 +1,14 @@
+en:
+  requesters:
+    index:
+      title: 'Requester List'
+    new:
+      title: 'New Requester'
+    create:
+      title: 'New Requester'
+    show:
+      title: 'Show Requester'
+    edit:
+      title: 'Edit Requester'
+    update:
+      title: 'Edit Requester'

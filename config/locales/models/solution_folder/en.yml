@@ -6,7 +6,9 @@ en:
         other: 'Solution Folders'
     attributes:
       solution_folder:
-        id: 'ID'
+        name: 'Name'
+        description: 'Description'
+        solution_category_id: 'Solution Category'
   solution_folders:
     create:
       success: 'Solution Folder <b>%{value}</b> created successfully'

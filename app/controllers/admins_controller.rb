@@ -1,59 +1,53 @@
-class UsersController < ApplicationController
-  load_and_authorize_resource :user
+class AdminsController < ApplicationController
+  load_and_authorize_resource
 
   before_action :authenticate_user!
 
   def index
     respond_to do |format|
       format.html
-      format.json { render json: UserDatatable.new(view_context) }
+      format.json { render json: AdminDatatable.new(view_context) }
     end
   end
 
   def new
-    @user = User.new
+    @admin = Admin.new
   end
 
   def create
-    @user = User.new(user_params)
-    @user.sign_up_terms = true
+    @admin = Admin.new(user_params)
 
-    if @user.save
-      redirect_to users_path, notice: t('.success', value: @user.fullname)
+    if @admin.save
+      redirect_to admins_path, notice: t('.success', value: @admin.fullname)
     else
       render :new
     end
   end
 
   def show
-    @user = User.find(params[:id])
-    if current_user.role? :user
-      render :show_user
-    else
-      render :show
-    end
+    @admin = Admin.find(params[:id])
   end
 
   def edit
-    @user = User.find(params[:id])
+    @admin = Admin.find(params[:id])
   end
 
   def update
-    @user = User.find(params[:id])
+    @admin = Admin.find(params[:id])
 
-    if update_resource(@user, user_params)
-      redirect_to users_path, notice: t('.success', value: @user.fullname)
+    if update_resource(@admin, user_params)
+      redirect_to users_path, notice: t('.success', value: @admin.fullname)
     else
       render :edit
     end
   end
 
   def destroy
-    @user = User.find(params[:id])
+    @admin = Admin.find(params[:id])
 
     respond_to do |format|
-      if @user.destroy
-        message = t('.success', value: @user.fullname)
+      if @admin.destroy
+        message = t('.success', value: @admin.fullname)
 
         format.html{ redirect_to users_path, notice: message }
         format.js do
@@ -61,7 +55,7 @@ class UsersController < ApplicationController
           render 'shared/js/destroy'
         end
       else
-        message = t('.error', value: @user.fullname)
+        message = t('.error', value: @admin.fullname)
         format.html{ redirect_to users_path, notice: message }
         format.js do
           flash.now[:alert] = message
@@ -69,12 +63,6 @@ class UsersController < ApplicationController
         end
       end
     end
-  end
-
-  def checksession
-    render json: {
-        balance: current_user.balance
-    }
   end
 
   private

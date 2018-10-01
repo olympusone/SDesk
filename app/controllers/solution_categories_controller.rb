@@ -21,7 +21,7 @@ class SolutionCategoriesController < ApplicationController
   def create
     @solution_category = SolutionCategory.new(solution_category_params)
 
-    flash.now[:notice] = t('.success', value: @solution_category.provider) if @solution_category.save
+    flash.now[:notice] = t('.success', value: @solution_category.name) if @solution_category.save
     render 'shared/js/save', locals: {resource: @solution_category}
   end
 
@@ -33,7 +33,7 @@ class SolutionCategoriesController < ApplicationController
   def update
     @solution_category = SolutionCategory.find(params[:id])
 
-    flash.now[:notice] = t('.success', value: @solution_category.provider) if @solution_category.update_attributes(solution_category_params)
+    flash.now[:notice] = t('.success', value: @solution_category.name) if @solution_category.update_attributes(solution_category_params)
     render 'shared/js/save', locals: {resource: @solution_category}
   end
 
@@ -41,10 +41,10 @@ class SolutionCategoriesController < ApplicationController
     @solution_category = SolutionCategory.find(params[:id])
 
     if @solution_category.destroy
-      message = t('.success', value: @solution_category.provider)
+      message = t('.success', value: @solution_category.name)
       flash.now[:notice] = message
     else
-      message = t('.error', value: @solution_category.provider)
+      message = t('.error', value: @solution_category.name)
       flash.now[:alert] = message
     end
 

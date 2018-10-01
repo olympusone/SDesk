@@ -1,0 +1,36 @@
+<%= simple_nested_form_for :setting, url: setting_path, method: :put, defaults: {required: false}, html: {autocomplete: 'off'} do |f| %>
+<div class="card">
+  <div class="vtabs customvtab">
+      <ul class="nav nav-tabs tabs-vertical" role="tablist">
+        <li class="nav-item"> <a class="nav-link active show" data-toggle="tab" href="#company" role="tab" aria-selected="true"><span class="hidden-sm-up"><i class="fas fa-info-circle"></i></span> <span class="hidden-xs-down"><%= t 'settings.tab.company_info' %></span> </a> </li>
+        <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#email_account" role="tab" aria-selected="false"><span class="hidden-sm-up"><i class="fas fa-envelope"></i></span> <span class="hidden-xs-down"><%= t 'settings.tab.email_account' %></span></a> </li>
+      </ul>
+
+      <!-- Tab panes -->
+      <div class="tab-content">
+        <div class="tab-pane p-20 active show" id="company" role="tabpanel">
+
+          <%= setting_input f, :company_name, @settings %>
+
+          <div class="row">
+            <%= setting_input f, :company_phone, @settings, wrapper_html: {class: 'col-sm-6'} %>
+            <%= setting_input f, :company_email, @settings, wrapper_html: {class: 'col-sm-6'} %>
+          </div>
+        </div>
+
+        <div class="tab-pane p-20" id="email_account" role="tabpanel">
+          <div class="row">
+            <%= setting_input f, :mail_server_host, @settings, wrapper_html: {class: 'col-sm-6'} %>
+            <%= setting_input f, :mail_server_port, @settings, wrapper_html: {class: 'col-sm-6'} %>
+            <%= setting_input f, :mail_server_username, @settings, wrapper_html: {class: 'col-sm-6'} %>
+            <%= setting_input f, :mail_server_password, @settings, wrapper_html: {class: 'col-sm-6'} %>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+
+  <div class="m-b-10">
+    <%= f.button :submit, t('helpers.submit.setting.create'), class:'btn-info' %>
+  </div>
+<% end %>

@@ -50,18 +50,14 @@
         </div>
       </div>
 
-      <%= render 'layouts/partials/flash_messages' %>
-
       <%= yield %>
     </div>
   </div>
 
-  <footer class="footer">
+  <footer class="footer d-none">
     © <%= Date.current.year %> Developed by <%= link_to 'OlympusOne', 'https://olympusone.com', target: :blank %>
   </footer>
 </div>
-
-
 
 <%= javascript_include_tag 'application' %>
 
@@ -78,6 +74,15 @@
         ' insertdatetime link media noneditable pagebreak paste preview print searchreplace table wordcount',
         content_css: ['https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css']
     });
+
+    <% if notice || alert %>
+    toastr['<%= notice ? 'success' : 'warning' %>']('<%= (notice || alert).html_safe %>', {
+        "closeButton": true,
+        "newestOnTop": true,
+        "progressBar": true,
+        "preventDuplicates": true
+    });
+    <% end %>
 </script>
 
 <%= yield :javascript_code %>

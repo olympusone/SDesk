@@ -1,0 +1,6 @@
+en:
+  helpers:
+    submit:
+      ticket_template:
+        create: 'Create'
+        update: 'Update'

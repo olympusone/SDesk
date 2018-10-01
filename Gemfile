@@ -3,8 +3,6 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.4.4'
 
-gem 'sidekiq'
-
 gem 'bootstrap', '~> 4.1.1'
 gem 'autoprefixer-rails'
 gem 'jquery-rails'

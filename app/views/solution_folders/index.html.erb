@@ -1,0 +1,33 @@
+<%= header_btn(t("solution_folders.new.title"), new_solution_folder_path, remote: true) if can?(:create, SolutionFolder) %>
+
+<div class="card">
+  <div class="card-body">
+    <table id="solution_folders_datatable" class="display nowrap table table-hover dataTable" data-source="<%= solution_folders_path(format: :json) %>">
+      <thead>
+      <tr>
+        <th><%= t 'activerecord.attributes.solution_folder.name' %></th>
+        <th><%= t 'activerecord.models.solution_category.other' %></th>
+        <th class="dt-options"></th>
+      </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+
+<% content_for :javascript_code do %>
+  <script>
+      var params = {
+          columns: [
+              {data: 'name'},
+              {data: 'solution_category'},
+              {data: 'actions'},
+          ]
+      };
+
+      initDatatable($('#solution_folders_datatable'), params);
+  </script>
+<% end %>

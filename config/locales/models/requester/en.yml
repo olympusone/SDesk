@@ -1,13 +1,13 @@
 en:
   activerecord:
     models:
-      user:
-        one: 'User'
-        other: 'Users'
+      requester:
+        one: 'Requester'
+        other: 'Requesters'
     attributes:
-      user:
+      requester:
         id: 'ID'
-        username: 'Username'
+        requestername: 'Requestername'
         fullname: 'Full Name'
         confirmed: 'Confirmed'
         name: 'Name'
@@ -24,19 +24,19 @@ en:
         points: 'Points'
         email: 'Email'
         password: 'Password'
-  users:
+  requesters:
     create:
-      success: 'User <b>%{value}</b> created successfully'
+      success: 'Requester <b>%{value}</b> created successfully'
     update:
-      success: 'User <b>%{value}</b> updated successfully'
+      success: 'Requester <b>%{value}</b> updated successfully'
     destroy:
-      success: 'User <b>%{value}</b> deleted successfully'
-      error: 'User <b>%{value}</b> is not deleted'
+      success: 'Requester <b>%{value}</b> deleted successfully'
+      error: 'Requester <b>%{value}</b> is not deleted'
   enumerize:
-    user:
+    requester:
       role:
         admin: 'Admin'
-        user: 'User'
+        requester: 'Requester'
       gender:
         m: 'Male'
         f: 'Female'

@@ -1,49 +1,18 @@
 en:
   activerecord:
     models:
-      user:
-        one: 'User'
-        other: 'Users'
+      company:
+        one: 'Company'
+        other: 'Companies'
     attributes:
-      user:
+      company:
         id: 'ID'
-        username: 'Username'
-        fullname: 'Full Name'
-        confirmed: 'Confirmed'
-        name: 'Name'
-        lastname: 'Lastname'
-        role: 'Role'
-        locked: 'Locked'
-        state: 'State'
-        dob: 'Date of Birth'
-        balance: 'Balance'
-        country: 'Country'
-        timezone: 'Timezone'
-        gender: 'Gender'
-        level: 'Level'
-        points: 'Points'
-        email: 'Email'
-        password: 'Password'
-  users:
+        companyname: 'Companyname'
+  companies:
     create:
-      success: 'User <b>%{value}</b> created successfully'
+      success: 'Company <b>%{value}</b> created successfully'
     update:
-      success: 'User <b>%{value}</b> updated successfully'
+      success: 'Company <b>%{value}</b> updated successfully'
     destroy:
-      success: 'User <b>%{value}</b> deleted successfully'
-      error: 'User <b>%{value}</b> is not deleted'
-  enumerize:
-    user:
-      role:
-        admin: 'Admin'
-        user: 'User'
-      gender:
-        m: 'Male'
-        f: 'Female'
-      level:
-        bronze: 'Bronze'
-        bronze: 'Silver'
-        bronze: 'Gold'
-        bronze: 'Platinum'
-        bronze: 'Diamond'
-        bronze: 'SAPPHIRE'
+      success: 'Company <b>%{value}</b> deleted successfully'
+      error: 'Company <b>%{value}</b> is not deleted'

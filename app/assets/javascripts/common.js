@@ -2,8 +2,6 @@ I18n.defaultLocale = defaultLocale;
 I18n.locale = locale;
 I18n.fallbacks = fallbacks;
 
-$.fn.modal.Constructor.prototype.enforceFocus = function() {};
-
 $.extend(true, $.fn.datetimepicker.defaults, {
     icons: {
         time: 'far fa-clock',
@@ -36,8 +34,47 @@ $(document).on('show.bs.modal', function(e) {
 });
 
 $(document).on('shown.bs.modal', function(e) {
+    if($('input[type="checkbox"]', e.target).length){
+        $('input[type="checkbox"]', e.target).iCheck({
+            checkboxClass: 'icheckbox_flat-blue',
+            radioClass: 'iradio_flat-blue',
+            labelHover: false,
+            cursor: true
+        });
+    }
+
+    if($('.tagsinput', e.target).length){
+        $('.tagsinput', e.target).tagsinput({
+            trimValue: true
+        });
+    }
+
     if($('.select2', e.target).length){
         $('.select2', e.target).select2();
+    }
+
+    if($('input.date-picker', e.target).length){
+        // init datepicker
+        $('input.date-picker', e.target).datetimepicker({
+            locale: I18n.locale,
+            format: 'DD/MM/YYYY',
+            keepOpen: false,
+        });
+    }
+
+    if($('input.datetime-picker', e.target).length){
+        // init datepicker
+        $('input.datetime-picker', e.target).datetimepicker({
+            locale: I18n.locale,
+            format: 'DD/MM/YYYY HH:mm',
+            keepOpen: false,
+        });
+    }
+
+    if($('.select2-ajax', e.target).length){
+        $('.select2-ajax', e.target).each(function () {
+            initSelect2Ajax($(this));
+        })
     }
 });
 
@@ -45,10 +82,19 @@ $(document).on('nested:fieldAdded', function(event){
     $('.select2').select2();
 });
 
-$(function() {
+$(function(){
     'use strict';
 
+    $.fn.modal.Constructor.prototype.enforceFocus = function() {};
+
     $("img").lazyload();
+
+    $('input[type="checkbox"]').not('.switchery').iCheck({
+        checkboxClass: 'icheckbox_flat-blue',
+        radioClass: 'iradio_flat-blue',
+        labelHover: false,
+        cursor: true
+    });
 
     FastClick.attach(document.body);
 
@@ -86,13 +132,19 @@ $(function() {
     });
 
     $('.select2').select2();
+    if($('.select2-ajax').length){
+        $('select2-ajax').each(function () {
+            initSelect2Ajax($(this));
+        })
+    }
 
     $(document).on('keyup', 'input.nospace, textarea.nospace', function(){
         var value = $(this).val().replace(/\s+/, '');
         $(this).val(value);
-    })
+    });
 
     $('.tagsinput').tagsinput({
         trimValue: true
     });
+
 });

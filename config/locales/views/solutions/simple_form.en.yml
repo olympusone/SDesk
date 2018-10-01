@@ -4,3 +4,7 @@ en:
       solution:
         create: 'Create'
         update: 'Update'
+  simple_form:
+    include_blanks:
+      solution:
+        solution_folder: 'Select Solution Folder..'

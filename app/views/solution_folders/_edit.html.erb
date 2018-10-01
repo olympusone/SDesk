@@ -1,0 +1,23 @@
+<div id="solutionFolderModal" class="modal" role="dialog" aria-labelledby="solutionFolderModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="solutionFolderModal"><%= t 'activerecord.models.solution_folder.one' %></h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+      </div>
+      <%= simple_nested_form_for @solution_folder, remote: true do |f| %>
+        <div class="modal-body">
+          <%= f.input :name %>
+          <%= f.association :solution_category, include_blank: :translate, input_html:{class:'select2'} %>
+          <%= f.input :description %>
+        </div>
+        <div class="modal-footer">
+          <%= f.button :submit, class: 'btn-info' %>
+          <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Close</button>
+        </div>
+      <% end %>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
