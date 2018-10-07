@@ -1,0 +1,14 @@
+en:
+  departments:
+    index:
+      title: 'Department List'
+    new:
+      title: 'New Department'
+    create:
+      title: 'New Department'
+    show:
+      title: 'Department'
+    edit:
+      title: 'Edit Department'
+    update:
+      title: 'Edit Department'

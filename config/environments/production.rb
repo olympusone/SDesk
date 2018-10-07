@@ -62,8 +62,8 @@ Rails.application.configure do
   # config.cache_store = :mem_cache_store
 
   # Use a real queuing backend for Active Job (and separate queues per environment)
-  config.active_job.queue_adapter     = :sidekiq
-  config.active_job.queue_name_prefix = "sdesk_#{Rails.env}"
+  # config.active_job.queue_adapter     = :sidekiq
+  # config.active_job.queue_name_prefix = "sdesk_#{Rails.env}"
 
   config.action_mailer.perform_caching = false
 
@@ -95,7 +95,7 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   # Allowing hos
-  config.action_mailer.default_url_options = { host: "sdesk.com" }
+  config.action_mailer.default_url_options = { host: "sdesk.olympusone.com" }
 
   config.action_mailer.smtp_settings = {
       address:              'srv1.olympusone.com',

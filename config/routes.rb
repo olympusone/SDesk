@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  resources :admins
   devise_for :users, controllers: {
       sessions: 'users/sessions',
       devise: 'users/devise',
@@ -14,9 +13,12 @@ Rails.application.routes.draw do
       get '/admin', to: 'devise/sessions#new'
     end
 
-    root 'dashboard#index'
+    root 'dashboard#index'#, constraints: lambda { |request| request.env['warden'].user.present?}
+    # root 'tickets#new'
 
-    resources :users
+    resources :admins
+    resources :agents
+
     resource :setting
 
     get '/knowledge-base', to: 'solutions#knowledge_base'
@@ -28,9 +30,9 @@ Rails.application.routes.draw do
     resources :tickets, shallow: true do
       resources :ticket_replies
     end
+
     resources :requesters
     resources :companies
     resources :departments
-    resources :agents
   end
 end

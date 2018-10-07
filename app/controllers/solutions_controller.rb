@@ -58,6 +58,7 @@ class SolutionsController < ApplicationController
   private
 
   def solution_params
-    params.require(:solution).permit(:title, :description, :solution_folder_id)
+    params.require(:solution).permit(:title, :description, :solution_folder_id,
+                                     file_attachments_attributes:[:id, :_destroy, :file])
   end
 end

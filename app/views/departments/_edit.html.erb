@@ -1,14 +1,13 @@
-<div id="solutionFolderModal" class="modal" role="dialog" aria-labelledby="solutionFolderModal">
+<div id="departmentModal" class="modal" role="dialog" aria-labelledby="departmentModal">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title" id="solutionFolderModal"><%= t 'activerecord.models.solution_folder.one' %></h4>
+        <h4 class="modal-title" id="departmentModal"><%= t 'activerecord.models.department.one' %></h4>
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
       </div>
-      <%= simple_nested_form_for @solution_folder, wrapper: :horizontal_form, remote: true do |f| %>
+      <%= simple_nested_form_for @department, wrapper: :horizontal_form, remote: true do |f| %>
         <div class="modal-body">
           <%= f.input :name %>
-          <%= f.association :solution_category, include_blank: :translate, input_html:{class:'select2'} %>
           <%= f.input :description %>
         </div>
         <div class="modal-footer">

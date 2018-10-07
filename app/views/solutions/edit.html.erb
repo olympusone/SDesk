@@ -1,6 +1,6 @@
 <%= header_btn(t("solutions.new.title"), new_solution_path) if can?(:create, Solution) %>
 
-<%= simple_nested_form_for @solution, html:{multipart: true} do |f| %>
+<%= simple_nested_form_for setup_solution(@solution), wrapper: :horizontal_form, html:{multipart: true} do |f| %>
 
   <%= render 'shared/form_errors', resource: @solution %>
 
@@ -10,6 +10,30 @@
       <%= f.association :solution_folder, include_blank: :translate, input_html: {class: 'select2'} %>
       <%= f.input :tags, input_html:{class:'tagsinput'} %>
       <%= f.input :content, input_html:{class:'tinymce'} %>
+
+      <hr>
+
+      <table id="solution-files" class="table table-sm table-hover">
+        <tbody>
+        <%= f.simple_fields_for :file_attachments, wrapper: false do |file| %>
+          <tr class="fields">
+            <td class="col-10">
+              <% if file.object.persisted? %>
+                <%= link_to file.object.file.blob.filename, rails_blob_path(file.object.file, disposition: 'preview') %>
+              <% else %>
+                <%= file.input :file, label: false %>
+              <% end %>
+            </td>
+            <td class="col-2 text-right">
+              <%= link_to icon('fas', 'download'), rails_blob_path(file.object.file, disposition: 'attachment'), class: 'btn btn-circle btn-sm btn-success' if file.object.file.try(:attached?) %>
+              <%= file.link_to_remove icon('fas', 'times'), class: 'btn btn-danger btn-circle btn-sm' %>
+            </td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+
+      <%= f.link_to_add icon('fas', 'plus', t('activerecord.models.file_attachment.one')), :file_attachments, data:{target: '#solution-files'}, class:'mt-2 btn btn-info' %>
     </div>
   </div>
 

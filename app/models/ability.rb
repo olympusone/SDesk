@@ -12,6 +12,7 @@ class Ability
       can :manage, :all
     else
       can :create, Ticket
+      can :read, [SolutionCategory, SolutionFolder, Solution]
     end
   end
 end

@@ -1,5 +1,5 @@
 function initSwitchers(target) {
-    var _target = target === 'undefined' ? 'body' : target;
+    let _target = target === 'undefined' ? 'body' : target;
 
     if($('.js-switch', target).length){
         $('.js-switch', target).each(function(){
@@ -9,7 +9,7 @@ function initSwitchers(target) {
 }
 
 function initSwitch(element){
-    var defaults = {
+    let defaults = {
         color             : '#64bd63',
         secondaryColor    : '#dfdfdf',
         jackColor         : '#fff',
@@ -22,7 +22,7 @@ function initSwitch(element){
     };
 
     $.each(defaults, function (key, value) {
-        var el_value = element.data(key);
+        let el_value = element.data(key);
 
         if(typeof el_value === 'undefined')
             el_value = element.data(key.toLowerCase());

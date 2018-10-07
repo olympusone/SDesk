@@ -1,0 +1,51 @@
+<%= header_btn(t("admins.new.title"), new_admin_path) %>
+
+<%= simple_nested_form_for setup_admin(@admin), wrapper: :horizontal_form ,html:{multipart: true} do |f| %>
+
+  <%= render 'shared/form_errors', resource: @admin %>
+
+  <div class="row">
+    <div class="col-md-9">
+
+      <div class="card">
+        <div class="card-body">
+          <%= f.input :name %>
+          <%= f.input :lastname %>
+          <%= f.input :title %>
+
+          <hr>
+
+          <%= f.simple_fields_for :user do |u| %>
+            <%= u.input :email %>
+            <%= u.input :password %>
+            <%= u.input :password_confirmation %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="card">
+        <div class="card-body">
+          <%= f.simple_fields_for :user do |u| %>
+            <%= image_input u, u.object.avatar, lazy: true, width: 150, class: 'mx-auto d-block' %>
+            <div class="form-group">
+              <%= u.input_field :confirmed, as: :boolean, class: "js-switch", data:{disabled: u.object.confirmed?} %>
+              <label><%= t "activerecord.attributes.user.confirmed" %></label>
+            </div>
+            <div class="form-group">
+              <%= u.input_field :locked, as: :boolean, class: "js-switch", data: {color: "#c0392b", jackSecondaryColor: "#e74c3c"} %>
+              <label><%= t "activerecord.attributes.user.locked" %></label>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="m-b-10">
+    <%= f.button :submit, class: 'btn-info' %>
+    <%= cancel_btn(admins_path) %>
+    <%= delete_btn(@admin, class: 'float-md-right') %>
+  </div>
+<% end %>

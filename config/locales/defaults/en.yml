@@ -42,3 +42,5 @@ en:
   flash_messages:
     notice: 'Success!'
     alert: 'Error!'
+  modal:
+    close: 'Cancel'

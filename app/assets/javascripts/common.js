@@ -34,12 +34,10 @@ $(document).on('show.bs.modal', function(e) {
 });
 
 $(document).on('shown.bs.modal', function(e) {
-    if($('input[type="checkbox"]', e.target).length){
-        $('input[type="checkbox"]', e.target).iCheck({
-            checkboxClass: 'icheckbox_flat-blue',
-            radioClass: 'iradio_flat-blue',
-            labelHover: false,
-            cursor: true
+    if($('input[type="checkbox"]:not(.js-switch)', e.target).length){
+        $('input[type="checkbox"]:not(.js-switch)').iCheck({
+            checkboxClass: 'icheckbox_square-blue',
+            radioClass: 'iradio_square-blue'
         });
     }
 
@@ -85,20 +83,7 @@ $(document).on('nested:fieldAdded', function(event){
 $(function(){
     'use strict';
 
-    $.fn.modal.Constructor.prototype.enforceFocus = function() {};
-
-    $("img").lazyload();
-
-    $('input[type="checkbox"]').not('.switchery').iCheck({
-        checkboxClass: 'icheckbox_flat-blue',
-        radioClass: 'iradio_flat-blue',
-        labelHover: false,
-        cursor: true
-    });
-
-    FastClick.attach(document.body);
-
-    var _token = $('meta[name=csrf-token]').attr('content');
+    let _token = $('meta[name=csrf-token]').attr('content');
 
     // always pass csrf tokens on ajax calls
     $.ajaxSetup({
@@ -112,8 +97,21 @@ $(function(){
         }
     });
 
+    $.fn.modal.Constructor.prototype.enforceFocus = function() {};
+
+    $("img").lazyload();
+
+    $('input[type="checkbox"]:not(.js-switch)').iCheck({
+        checkboxClass: 'icheckbox_flat-blue',
+        radioClass: 'iradio_flat-blue',
+        labelHover: false,
+        cursor: true
+    });
+
+    FastClick.attach(document.body);
+
     $(document).on("focusout", "input[type='text']", function () {
-        var value = $(this).val().trim();
+        let value = $(this).val().trim();
         $(this).val(value);
     });
 
@@ -139,7 +137,7 @@ $(function(){
     }
 
     $(document).on('keyup', 'input.nospace, textarea.nospace', function(){
-        var value = $(this).val().replace(/\s+/, '');
+        let value = $(this).val().replace(/\s+/, '');
         $(this).val(value);
     });
 

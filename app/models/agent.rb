@@ -7,4 +7,6 @@ class Agent < ApplicationRecord
   belongs_to :department, optional: true
 
   accepts_nested_attributes_for :user, update_only: true
+
+  default_scope {order :name, :lastname}
 end

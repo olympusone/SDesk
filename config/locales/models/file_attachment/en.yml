@@ -1,0 +1,9 @@
+en:
+  activerecord:
+    models:
+      file_attachment:
+        one: 'File'
+        other: 'Files'
+    attributes:
+      file_attachment:
+        file: 'File'

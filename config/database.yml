@@ -14,6 +14,6 @@ development:
 
 production:
   <<: *default
-  database: sdesk
-  username: sdesk
-  password: idu44K9X0oUT
+  database: olympuso_sdesk
+  username: olympuso
+  password: D4RV8WK3

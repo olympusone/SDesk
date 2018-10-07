@@ -1,7 +1,9 @@
 class AgentsController < ApplicationController
   load_and_authorize_resource
-
   before_action :authenticate_user!
+
+  add_breadcrumb I18n.t('activerecord.models.user.other')
+  add_breadcrumb I18n.t('activerecord.models.agent.other'), :agents_path
 
   def index
     respond_to do |format|
@@ -12,15 +14,16 @@ class AgentsController < ApplicationController
 
   def new
     @agent = Agent.new
+    render :edit
   end
 
   def create
-    @agent = Agent.new(user_params)
+    @agent = Agent.new(agent_params)
 
     if @agent.save
       redirect_to agents_path, notice: t('.success', value: @agent.fullname)
     else
-      render :new
+      render :edit
     end
   end
 
@@ -35,7 +38,7 @@ class AgentsController < ApplicationController
   def update
     @agent = Agent.find(params[:id])
 
-    if update_resource(@agent, user_params)
+    if update_resource(@agent, agent_params)
       redirect_to users_path, notice: t('.success', value: @agent.fullname)
     else
       render :edit
@@ -66,15 +69,15 @@ class AgentsController < ApplicationController
   end
 
   private
-  def user_params
-    # TODO ean to role einai :user tote na dinei sigkekrimena attributes, oxi ola
-    params.require(:user).permit(:name, :lastname, :username, :dob, :avatar, :role, :confirmed, :locked,
-                                 :password_confirmation, :email, :password, :country, :timezone, :gender,
-                                 identities_attributes:[:id, :_destroy, :provider, :uid])
+  def agent_params
+    params.require(:agent).permit(:name, :lastname, :title, :department_id, user_attributes:[:email, :password, :password_confirmation, :locked, :confirmed])
   end
 
   def update_resource(resource, _params)
-    if _params[:password].blank?
+    if _params[:agent][:user_attributes][:password].blank?
+      _params[:agent][:user_attributes].delete(:password)
+      _params[:agent][:user_attributes].delete(:password_confirmation)
+
       resource.update_without_password(_params)
     else
       resource.update_attributes(_params)

@@ -4,3 +4,7 @@ en:
       agent:
         create: 'Create'
         update: 'Update'
+  simple_form:
+    include_blanks:
+      agent:
+        department: 'Select Department..'

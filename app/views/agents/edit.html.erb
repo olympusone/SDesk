@@ -1,0 +1,51 @@
+<%= header_btn(t("agents.new.title"), new_agent_path) %>
+
+<%= simple_nested_form_for setup_agent(@agent), wrapper: :horizontal_form ,html:{multipart: true} do |f| %>
+
+  <%= render 'shared/form_errors', resource: @agent %>
+
+  <div class="row">
+    <div class="col-md-9">
+
+      <div class="card">
+        <div class="card-body">
+          <%= f.input :name %>
+          <%= f.input :lastname %>
+          <%= f.association :department, include_blank: :translate, input_html:{class:'select2'} %>
+
+          <hr>
+
+          <%= f.simple_fields_for :user do |u| %>
+            <%= u.input :email %>
+            <%= u.input :password %>
+            <%= u.input :password_confirmation %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="card">
+        <div class="card-body">
+          <%= f.simple_fields_for :user do |u| %>
+            <%= image_input u, u.object.avatar, lazy: true, width: 150, class: 'mx-auto d-block' %>
+            <div class="form-group">
+              <%= u.input_field :confirmed, as: :boolean, class: "js-switch", data:{disabled: u.object.confirmed?} %>
+              <label><%= t "activerecord.attributes.user.confirmed" %></label>
+            </div>
+            <div class="form-group">
+              <%= u.input_field :locked, as: :boolean, class: "js-switch", data: {color: "#c0392b", jackSecondaryColor: "#e74c3c"} %>
+              <label><%= t "activerecord.attributes.user.locked" %></label>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="m-b-10">
+    <%= f.button :submit, class: 'btn-info' %>
+    <%= cancel_btn(agents_path) %>
+    <%= delete_btn(@agent, class: 'float-md-right') %>
+  </div>
+<% end %>

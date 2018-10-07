@@ -4,4 +4,6 @@ class SolutionFolder < ApplicationRecord
 
   has_many :solutions, dependent: :destroy
   belongs_to :solution_category
+
+  default_scope {order :name}
 end

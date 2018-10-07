@@ -8,4 +8,6 @@ class Admin < ApplicationRecord
   def fullname
     "#{self.name} #{self.fullname}"
   end
+
+  default_scope {order :lastname, :name}
 end

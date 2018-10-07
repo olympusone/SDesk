@@ -16,12 +16,6 @@ en:
         locked: 'Locked'
         state: 'State'
         dob: 'Date of Birth'
-        balance: 'Balance'
-        country: 'Country'
-        timezone: 'Timezone'
-        gender: 'Gender'
-        level: 'Level'
-        points: 'Points'
         email: 'Email'
         password: 'Password'
   users:

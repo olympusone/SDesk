@@ -1,0 +1,29 @@
+<%= header_btn(t("departments.new.title"), new_department_path, remote: true) if can?(:create, Department) %>
+
+<div class="card">
+  <div class="card-body">
+    <table id="departments_datatable" class="display nowrap table table-hover dataTable" data-source="<%= departments_path(format: :json) %>">
+      <thead>
+      <tr>
+        <th><%= t 'activerecord.attributes.department.name' %></th>
+        <th class="dt-options"></th>
+      </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+
+<% content_for :javascript_code do %>
+  <script>
+      initDatatable($('#departments_datatable'), {
+          columns: [
+              {data: 'name'},
+              {data: 'actions'},
+          ]
+      });
+  </script>
+<% end %>

@@ -1,0 +1,6 @@
+en:
+  helpers:
+    submit:
+      department:
+        create: 'Create'
+        update: 'Update'
