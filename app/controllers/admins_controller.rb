@@ -39,7 +39,7 @@ class AdminsController < ApplicationController
     @admin = Admin.find(params[:id])
 
     if update_resource(@admin, admin_params)
-      redirect_to users_path, notice: t('.success', value: @admin.fullname)
+      redirect_to admins_path, notice: t('.success', value: @admin.fullname)
     else
       render :edit
     end
@@ -74,13 +74,11 @@ class AdminsController < ApplicationController
   end
 
   def update_resource(resource, _params)
-    if _params[:admin][:user_attributes][:password].blank?
-      _params[:admin][:user_attributes].delete(:password)
-      _params[:admin][:user_attributes].delete(:password_confirmation)
-
-      resource.update_without_password(_params)
-    else
-      resource.update_attributes(_params)
+    if _params[:user_attributes][:password].blank?
+      _params[:user_attributes].delete(:password)
+      _params[:user_attributes].delete(:password_confirmation)
     end
+
+    resource.update_attributes(_params)
   end
 end

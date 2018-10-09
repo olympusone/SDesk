@@ -1,13 +1,13 @@
-<%= header_btn(t("agents.new.title"), new_agent_path) if can?(:create, Agent) %>
+<%= header_btn(t("requesters.new.title"), new_requester_path) if can?(:create, Requester) %>
 
 <div class="card">
   <div class="card-body">
-    <table id="agents_datatable" class="display table table-hover dataTable" data-source="<%= agents_path(format: :json) %>">
+    <table id="requesters_datatable" class="display table table-hover dataTable" data-source="<%= requesters_path(format: :json) %>">
       <thead>
       <tr>
-        <th><%= t 'activerecord.attributes.agent.name' %></th>
-        <th><%= t 'activerecord.attributes.agent.lastname' %></th>
-        <th><%= t 'activerecord.models.department.one' %></th>
+        <th><%= t 'activerecord.attributes.requester.name' %></th>
+        <th><%= t 'activerecord.attributes.requester.lastname' %></th>
+        <th><%= t 'activerecord.models.company.one' %></th>
         <th><%= t 'activerecord.attributes.user.email' %></th>
         <th class="text-center"><%= t 'activerecord.attributes.user.state' %></th>
         <th class="dt-options"></th>
@@ -27,13 +27,13 @@
           columns: [
               {data: 'name'},
               {data: 'lastname'},
-              {data: 'department'},
+              {data: 'company'},
               {data: 'email'},
               {data: 'state'},
               {data: 'actions'},
           ]
       };
 
-      initDatatable($('#agents_datatable'), params);
+      initDatatable($('#requesters_datatable'), params);
   </script>
 <% end %>

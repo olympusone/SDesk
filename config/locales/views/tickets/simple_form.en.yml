@@ -8,3 +8,4 @@ en:
     include_blanks:
       ticket:
         department: 'Select Department..'
+        agent: 'Select Agent..'

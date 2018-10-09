@@ -1,0 +1,41 @@
+<%= header_btn(t("tickets.new.title"), new_ticket_path) if can?(:create, Ticket) %>
+
+<div class="card">
+  <div class="card-body">
+    <table id="tickets_datatable" class="display table table-hover dataTable" data-source="<%= tickets_path(format: :json) %>">
+      <thead>
+      <tr>
+        <th><%= t 'activerecord.attributes.requester.name' %></th>
+        <th><%= t 'activerecord.attributes.agent.lastname' %></th>
+        <th><%= t 'activerecord.models.department.one' %></th>
+        <th><%= t 'activerecord.attributes.ticket.subject' %></th>
+        <th><%= t 'activerecord.attributes.ticket.priority' %></th>
+        <th><%= t 'activerecord.attributes.ticket.state' %></th>
+        <th class="dt-options"></th>
+      </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+
+<% content_for :javascript_code do %>
+  <script>
+      var params = {
+          columns: [
+              {data: 'requester'},
+              {data: 'agent'},
+              {data: 'department'},
+              {data: 'subject'},
+              {data: 'priority'},
+              {data: 'state'},
+              {data: 'actions'},
+          ]
+      };
+
+      initDatatable($('#tickets_datatable'), params);
+  </script>
+<% end %>

@@ -39,7 +39,7 @@ class AgentsController < ApplicationController
     @agent = Agent.find(params[:id])
 
     if update_resource(@agent, agent_params)
-      redirect_to users_path, notice: t('.success', value: @agent.fullname)
+      redirect_to agents_path, notice: t('.success', value: @agent.fullname)
     else
       render :edit
     end
@@ -74,13 +74,11 @@ class AgentsController < ApplicationController
   end
 
   def update_resource(resource, _params)
-    if _params[:agent][:user_attributes][:password].blank?
-      _params[:agent][:user_attributes].delete(:password)
-      _params[:agent][:user_attributes].delete(:password_confirmation)
-
-      resource.update_without_password(_params)
-    else
-      resource.update_attributes(_params)
+    if _params[:user_attributes][:password].blank?
+      _params[:user_attributes].delete(:password)
+      _params[:user_attributes].delete(:password_confirmation)
     end
+
+    resource.update_attributes(_params)
   end
 end

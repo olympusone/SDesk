@@ -1,8 +1,6 @@
 class Ticket < ApplicationRecord
   extend Enumerize
 
-  has_many_attached :attachments
-
   PRIORITY = {low: 1, medium: 2, high: 3}
   STATE = {open: 1, pending: 2, closed: 3}
 

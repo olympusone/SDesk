@@ -5,9 +5,9 @@ class Admin < ApplicationRecord
 
   accepts_nested_attributes_for :user, update_only: true
 
-  def fullname
-    "#{self.name} #{self.fullname}"
-  end
-
   default_scope {order :lastname, :name}
+
+  def fullname
+    "#{self.name} #{self.lastname}"
+  end
 end

@@ -1,0 +1,24 @@
+<%= header_btn(t("companys.new.title"), new_company_path) if can?(:create, Company) %>
+
+<%= simple_form_for @company, wrapper: :horizontal_form do |f| %>
+
+  <%= render 'shared/form_errors', resource: @company %>
+
+  <div class="card">
+    <div class="card-body">
+      <%= f.input :name %>
+      <%= f.input :domain %>
+      <%= f.input :notes, input_html:{class:'tinymce'} %>
+
+      <hr>
+      <%= f.input :address %>
+
+    </div>
+  </div>
+
+  <div class="m-b-10">
+    <%= f.button :submit, class: 'btn-info' %>
+    <%= cancel_btn(companies_path) %>
+    <%= delete_btn(@company, class: 'float-md-right') %>
+  </div>
+<% end %>

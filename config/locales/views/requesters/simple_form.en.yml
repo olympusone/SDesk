@@ -4,3 +4,7 @@ en:
       requester:
         create: 'Create'
         update: 'Update'
+  simple_form:
+    include_blanks:
+      requester:
+        company: 'Select Company..'
