@@ -1,0 +1,12 @@
+Mr/Miss <b><%= @requester.fullname %></b>.
+
+<p>
+  Your ticket with id <%= @ticket.id %>, has been opened.
+</p>
+
+<p>
+You can track the progress of your request or add a comment by clicking <%= link_to 'here', ticket_url(id: @ticket.id) %>.
+</p>
+
+With Regards,<br>
+SDesk

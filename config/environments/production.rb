@@ -100,8 +100,8 @@ Rails.application.configure do
   config.action_mailer.smtp_settings = {
       address:              'srv1.olympusone.com',
       port:                 587,
-      user_name:            'sdesk',
-      password:             'sdesk',
+      user_name:            'info@olympusone.com',
+      password:             'Dimidev89gr',
       enable_ssl:           true,
       authentication:       'plain',
       enable_starttls_auto: true

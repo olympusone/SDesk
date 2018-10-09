@@ -13,7 +13,7 @@ class DepartmentDatatable < AjaxDatatablesRails::Base
   def data
     records.map do |record|
       {
-          name: link_to(record.name, record),
+          name: record.name,
           actions: table_actions(record, edit:{remote: true}, destroy: {remote: true}),
           DT_RowId: record.id
       }

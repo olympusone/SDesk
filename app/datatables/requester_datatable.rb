@@ -9,7 +9,7 @@ class RequesterDatatable < AjaxDatatablesRails::Base
         lastname: {source: 'Requester.lastname'},
         department: {source: 'Company.name'},
         email: {source: 'User.email'},
-        state: {source: 'User.state'},
+        state: {orderable: false, searchable: false},
         actions: {orderable: false, searchable: false},
     }
   end

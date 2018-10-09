@@ -8,7 +8,7 @@ class AdminDatatable < AjaxDatatablesRails::Base
         name: {source: 'Admin.name'},
         lastname: {source: 'Admin.lastname'},
         email: {source: 'User.email'},
-        state: {source: 'User.state'},
+        state: {orderable: false, searchable: false},
         actions: {orderable: false, searchable: false},
     }
   end

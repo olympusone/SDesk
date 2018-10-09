@@ -1,4 +1,4 @@
-<%= header_btn(t("companys.new.title"), new_company_path) if can?(:create, Company) %>
+<%= header_btn(t("companies.new.title"), new_company_path) if can?(:create, Company) %>
 
 <%= simple_form_for @company, wrapper: :horizontal_form do |f| %>
 

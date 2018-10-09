@@ -9,7 +9,8 @@ class Ability
       can :manage, :all
       cannot :manage, Admin
     elsif user.role? :requester
-      can :manage, :all
+      can [:read, :create, :update], Ticket
+      can :read, [SolutionCategory, SolutionFolder, Solution]
     else
       can :create, Ticket
       can :read, [SolutionCategory, SolutionFolder, Solution]

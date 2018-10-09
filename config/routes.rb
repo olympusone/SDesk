@@ -33,6 +33,6 @@ Rails.application.routes.draw do
 
     resources :requesters
     resources :companies
-    resources :departments
+    resources :departments, except: :show
   end
 end

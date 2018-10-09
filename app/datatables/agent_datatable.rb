@@ -9,7 +9,7 @@ class AgentDatatable < AjaxDatatablesRails::Base
         lastname: {source: 'Agent.lastname'},
         department: {source: 'Department.name'},
         email: {source: 'User.email'},
-        state: {source: 'User.state'},
+        state: {orderable: false, searchable: false},
         actions: {orderable: false, searchable: false},
     }
   end

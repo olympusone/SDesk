@@ -12,7 +12,6 @@
           <%= image_tag image_path('logo.png'), class: 'dark-logo' %>
           <%= image_tag image_path('logo.png'), class: 'light-logo' %>
         </b>
-        <%= Setting.company_name %>
       </a>
     </div>
     <!-- ============================================================== -->
@@ -86,9 +85,11 @@
             </ul>
           </li>
 
-          <li>
-            <%= link_to icon('fas', 'tachometer-alt', t('admins.dashboard.title')), root_path, class: 'waves-effect waves-dark' %>
-          </li>
+          <% unless current_user.role? :requester %>
+            <li>
+              <%= link_to icon('fas', 'tachometer-alt', t('admins.dashboard.title')), root_path, class: 'waves-effect waves-dark' %>
+            </li>
+          <% end %>
 
           <% if can?(:index, Ticket) %>
             <li>
@@ -96,18 +97,19 @@
             </li>
           <% end %>
 
-
-          <li>
-            <%= link_to icon('fas', 'users', t('activerecord.models.requester.other')), 'javascript:void(0)', class: 'has-arrow waves-effect waves-dark' %>
-            <ul aria-expanded="false" class="collapse">
-              <% if can?(:index, Requester) %>
-                <li><%= link_to t('activerecord.models.requester.other'), requesters_path %></li>
-              <% end %>
-              <% if can?(:index, Company) %>
-                <li><%= link_to t('activerecord.models.company.other'), companies_path %></li>
-              <% end %>
-            </ul>
-          </li>
+          <% if can?(:index, Requester) || can?(:index, Company) %>
+            <li>
+              <%= link_to icon('fas', 'users', t('activerecord.models.requester.other')), 'javascript:void(0)', class: 'has-arrow waves-effect waves-dark' %>
+              <ul aria-expanded="false" class="collapse">
+                <% if can?(:index, Requester) %>
+                  <li><%= link_to t('activerecord.models.requester.other'), requesters_path %></li>
+                <% end %>
+                <% if can?(:index, Company) %>
+                  <li><%= link_to t('activerecord.models.company.other'), companies_path %></li>
+                <% end %>
+              </ul>
+            </li>
+          <% end %>
 
           <% if can?(:index, Admin) || can?(:index, Agent) %>
             <li>
@@ -145,20 +147,22 @@
             </li>
           <% end %>
 
-          <li>
-            <%= link_to icon('fas', 'cogs', t('settings.edit.title')), 'javascript:void(0)', class: 'has-arrow waves-effect waves-dark' %>
-            <ul aria-expanded="false" class="collapse">
+          <% if can?(:update, Setting) || can?(:index, TicketTemplate) %>
+            <li>
+              <%= link_to icon('fas', 'cogs', t('settings.edit.title')), 'javascript:void(0)', class: 'has-arrow waves-effect waves-dark' %>
+              <ul aria-expanded="false" class="collapse">
 
-              <% if can?(:update, Setting) %>
-                <li><%= link_to t('settings.edit.title'), edit_setting_path %></li>
-              <% end %>
+                <% if can?(:update, Setting) %>
+                  <li><%= link_to t('settings.edit.title'), edit_setting_path %></li>
+                <% end %>
 
-              <% if can?(:index, TicketTemplate) %>
-                <li><%= link_to t('activerecord.models.ticket_template.other'), ticket_templates_path %></li>
-              <% end %>
+                <% if can?(:index, TicketTemplate) %>
+                  <li><%= link_to t('activerecord.models.ticket_template.other'), ticket_templates_path %></li>
+                <% end %>
 
-            </ul>
-          </li>
+              </ul>
+            </li>
+          <% end %>
         <% else %>
           <% if can?(:create, Ticket) %>
             <li>

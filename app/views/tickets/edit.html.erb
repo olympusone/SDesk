@@ -1,0 +1,78 @@
+<%= header_btn(t("tickets.new.title"), new_ticket_path) if can?(:create, Ticket) && user_signed_in? %>
+
+<%= simple_nested_form_for setup_ticket(@ticket), html:{multipart: true} do |f| %>
+
+  <%= render 'shared/form_errors', resource: @ticket %>
+
+  <div class="row">
+    <div class="col-md-9">
+      <div class="card">
+        <div class="card-body">
+          <%= f.input :email, required: true unless user_signed_in? %>
+
+          <% if user_signed_in? && !current_user.role?(:requester) %>
+            <%= f.association :requester, include_blank: :translate, label_method: lambda{|r| "#{r.fullname} - #{r.user.email}"}, input_html: {class: 'select2'} %>
+          <% end %>
+
+          <%= f.input :subject %>
+          <%= f.input :tags, input_html: {class: 'tagsinput'} %>
+          <hr>
+
+          <%= f.input :description, input_html: {class: 'tinymce'} %>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <%= t 'activerecord.models.file_attachment.other' %>
+        </div>
+        <div class="card-body">
+          <table id="ticket-files" class="table table-sm table-hover">
+            <tbody>
+            <%= f.simple_fields_for :file_attachments, wrapper: false do |file| %>
+              <tr class="fields">
+                <td class="col-10">
+                  <% if file.object.persisted? %>
+                    <%= link_to file.object.file.blob.filename, rails_blob_path(file.object.file, disposition: 'preview') %>
+                  <% else %>
+                    <%= file.input :file, label: false %>
+                  <% end %>
+                </td>
+                <td class="col-2 text-right">
+                  <%= link_to icon('fas', 'download'), rails_blob_path(file.object.file, disposition: 'attachment'), class: 'btn btn-circle btn-sm btn-success' if file.object.file.try(:attached?) %>
+                  <%= file.link_to_remove icon('fas', 'times'), class: 'btn btn-danger btn-circle btn-sm' %>
+                </td>
+              </tr>
+            <% end %>
+            </tbody>
+          </table>
+
+          <%= f.link_to_add icon('fas', 'plus', t('activerecord.models.file_attachment.one')), :file_attachments, data: {target: '#ticket-files'}, class: 'mt-2 btn btn-info' %>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card">
+        <div class="card-body">
+          <%= f.association :department, include_blank: :translate, input_html: {disabled: (action_name.in?(['edit', 'update']) && current_user.try(:role?, :requester)), class: 'select2'} %>
+
+          <% if user_signed_in? && !current_user.role?(:requester) %>
+            <%= f.association :agent, include_blank: :translate, label_method: lambda{|ag| "#{ag.fullname} - #{ag.user.email}"}, input_html: {class: 'select2'} %>
+          <% end %>
+          <hr>
+          <%= f.input :priority, include_blank: false, input_html: {class: 'select2'} %>
+          <% if user_signed_in? && !current_user.role?(:requester) %>
+            <%= f.input :state, include_blank: false, input_html: {class: 'select2'} %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <div class="m-b-10">
+    <%= f.button :submit, class: 'btn-info' %>
+    <%= cancel_btn(root_path) %>
+  </div>
+<% end %>

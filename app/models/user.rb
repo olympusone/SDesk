@@ -12,9 +12,9 @@ class User < ApplicationRecord
 
   attr_accessor :confirmed, :locked, :skip_user_callbacks
 
+  validates :email, presence: true, uniqueness: {case_sensitive: false}
   validates_presence_of :password, on: :create
   validates_confirmation_of :password, if: lambda{self.password.present?}
-  validates_uniqueness_of :email, case_sensitive: false
 
   belongs_to :user, polymorphic: true
 
@@ -30,7 +30,6 @@ class User < ApplicationRecord
   end
 
   private
-
   def check_user_status
     self.skip_confirmation! if !self.confirmed.to_s.to_i.zero? && !self.confirmed?
 

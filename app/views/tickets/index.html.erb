@@ -5,12 +5,12 @@
     <table id="tickets_datatable" class="display table table-hover dataTable" data-source="<%= tickets_path(format: :json) %>">
       <thead>
       <tr>
-        <th><%= t 'activerecord.attributes.requester.name' %></th>
-        <th><%= t 'activerecord.attributes.agent.lastname' %></th>
+        <th><%= t 'activerecord.models.requester.one' %></th>
+        <th><%= t 'activerecord.models.agent.one' %></th>
         <th><%= t 'activerecord.models.department.one' %></th>
         <th><%= t 'activerecord.attributes.ticket.subject' %></th>
-        <th><%= t 'activerecord.attributes.ticket.priority' %></th>
-        <th><%= t 'activerecord.attributes.ticket.state' %></th>
+        <th class="text-center"><%= t 'activerecord.attributes.ticket.priority' %></th>
+        <th class="text-center"><%= t 'activerecord.attributes.ticket.state' %></th>
         <th class="dt-options"></th>
       </tr>
       </thead>

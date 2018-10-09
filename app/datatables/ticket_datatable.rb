@@ -1,5 +1,5 @@
 class TicketDatatable < AjaxDatatablesRails::Base
-  def_delegators :@view, :table_actions, :current_user, :icon, :link_to
+  def_delegators :@view, :table_actions, :current_user, :icon, :link_to, :link_to_if, :can?
 
   def view_columns
     # Declare strings in this format: ModelName.column_name
@@ -18,19 +18,25 @@ class TicketDatatable < AjaxDatatablesRails::Base
   def data
     records.map do |record|
       {
-          requester: link_to(record.requester.try(:lastname), record.requester, target: :blank),
-          agent: link_to(record.agent.try(:lastname), record.agent, target: :blank),
-          department: link_to(record.department.try(:name), record.department, target: :blank),
+          requester: link_to_if(can?(:show, record.requester), record.requester.try(:lastname), record.requester, target: :blank),
+          agent: link_to_if((record.agent && can?(:read, record.agent)), record.agent.try(:lastname), record.agent, target: :blank),
+          department: record.department.try(:name),
           subject: link_to(record.subject, record),
-          priority: link_to(record.priority_text, record),
-          state: link_to(record.state_text, record),
-          actions: table_actions(record, edit:{remote: true}, destroy: {remote: true}),
+          priority: record.priority_text,
+          state: record.state_text,
+          actions: table_actions(record, :edit, destroy: {remote: true}),
           DT_RowId: record.id
       }
     end
   end
 
   def get_raw_records
-    Ticket.dt_order(params).includes(:requester, :agent, :department).references(:requesters, :agents, :departments)
+    query = []
+
+    query << "tickets.requester_id = #{current_user.user_id}" if current_user.role? :requester
+
+    Ticket.dt_order(params)
+        .includes(:requester, :agent, :department)
+        .references(:requesters, :agents, :departments).where(query.join(' AND ') || nil)
   end
 end

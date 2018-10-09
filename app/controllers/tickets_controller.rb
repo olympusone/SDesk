@@ -1,6 +1,6 @@
 class TicketsController < ApplicationController
-  load_and_authorize_resource
-  before_action :authenticate_user!, except: [:new, :create]
+  # load_and_authorize_resource
+  # before_action :authenticate_user!, except: [:new, :create]
 
   def index
     respond_to do |format|
@@ -11,23 +11,75 @@ class TicketsController < ApplicationController
 
   def new
     @ticket = Ticket.new
+
+    @ticket.agent = current_user.user if user_signed_in? && current_user.role?(:agent)
+
+    render :edit
   end
 
   def create
-    if Requester.includes(:user).references(:users).exists?(users:{email: params[:ticket][:email]})
+    @ticket = Ticket.new(ticket_params)
 
-    else
-      render :new, alert: 'Email address is not belongs to any user.'
+    unless user_signed_in?
+      @ticket.requester = Requester.includes(:user).references(:users).find_by(users:{email: @ticket.email})
     end
+
+    if user_signed_in? && current_user.role?(:requester)
+      @ticket.requester = current_user.user
+    end
+
+    if @ticket.save
+      redirect_to (user_signed_in? ? tickets_path : new_ticket_path), notice: t('.success', value: @ticket.id)
+    else
+      @ticket.errors.add :email, :blank if @ticket.email.blank?
+      render :edit
+    end
+  end
+
+  def show
+
+  end
+
+  def edit
+    @ticket = Ticket.find(params[:id])
+  end
+
+  def update
+    @ticket = Ticket.find(params[:id])
+
+    if @ticket.update_attributes(ticket_params)
+      redirect_to tickets_path, notice: t('.success', value: @ticket.id)
+    else
+      render :edit
+    end
+  end
+
+  def destroy
+    @ticket = Ticket.find(params[:id])
+
+    if @ticket.destroy
+      message = t('.success', value: @ticket.id)
+      flash.now[:notice] = message
+    else
+      message = t('.error', value: @ticket.id)
+      flash.now[:alert] = message
+    end
+
+    render 'shared/js/destroy'
   end
 
   private
   def ticket_params
-    if current_user.role? :requester
-      params.require(:ticket).permit(:requester_id, :department_id, :subject, :description,
-                                     file_attachments_attributes:[:id, :_destroy, :file])
+    if user_signed_in?
+      if current_user.role? :requester
+        params.require(:ticket).permit(:department_id, :subject, :priority, :description, :tags,
+                                       file_attachments_attributes:[:id, :_destroy, :file])
+      else
+        params.require(:ticket).permit(:requester_id, :agent_id, :department_id, :priority, :state, :tags, :subject, :description,
+                                       file_attachments_attributes:[:id, :_destroy, :file])
+      end
     else
-      params.require(:ticket).permit(:requester_id, :agent_id, :department_id, :priority, :state, :tags, :subject, :description,
+      params.require(:ticket).permit(:email, :department_id, :priority, :tags, :subject, :description,
                                      file_attachments_attributes:[:id, :_destroy, :file])
     end
   end
