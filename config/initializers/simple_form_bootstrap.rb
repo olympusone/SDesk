@@ -18,7 +18,7 @@ SimpleForm.setup do |config|
   config.button_class = 'btn btn-primary'
 
   # form class
-  config.form_class = 'm-form'
+  config.form_class = 'form'
 
   # Define the default class of the input wrapper of the boolean input.
   config.boolean_label_class = 'form-check-label'
@@ -151,8 +151,8 @@ SimpleForm.setup do |config|
     b.optional :pattern
     b.optional :min_max
     b.optional :readonly
-    b.use :label, class: 'col-sm-4 col-lg-3 col-form-label text-md-right'
-    b.wrapper :grid_wrapper, tag: 'div', class: 'col-sm-8 col-lg-9' do |ba|
+    b.use :label, class: 'col-sm-4 col-md-3 col-lg-2 col-form-label text-sm-right'
+    b.wrapper :grid_wrapper, tag: 'div', class: 'col-sm-8 col-md-9 col-lg-10' do |ba|
       ba.use :input, class: 'form-control', error_class: 'is-invalid', valid_class: 'is-valid'
       ba.use :full_error, wrap_with: { tag: 'div', class: 'invalid-feedback' }
       ba.use :hint, wrap_with: { tag: 'small', class: 'form-text text-muted' }

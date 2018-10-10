@@ -1,0 +1,41 @@
+<%= header_btn(t("ticket_templates.new.title"), new_ticket_template_path) if can?(:create, TicketTemplate) %>
+
+<%= simple_nested_form_for @ticket_template, wrapper: :horizontal_form, html:{multipart: true} do |f| %>
+
+  <%= render 'shared/form_errors', resource: @ticket_template %>
+
+  <div class="card">
+    <div class="card-body">
+      <%= f.input :name %>
+      <%= f.input :subject %>
+
+      <hr>
+
+      <div class="form-group row string required ticket_template_name form-group-valid">
+        <label class="col-sm-4 col-md-3 col-lg-2 col-form-label text-sm-right"><%= t "activerecord.attributes.ticket_template.active" %></label>
+        <div class="col-sm-8 col-md-9 col-lg-10">
+          <%= f.input_field :active, as: :boolean, class: "js-switch" %>
+        </div>
+      </div>
+
+      <%= f.input :tags, input_html:{class:'tagsinput'} %>
+      <%= f.input :priority, include_blank: false, input_html: {class: 'select2'} %>
+      <% if user_signed_in? && !current_user.role?(:requester) %>
+        <%= f.input :state, include_blank: false, input_html: {class: 'select2'} %>
+      <% end %>
+
+      <hr>
+      <%= f.association :agent, include_blank: :translate, label_method: lambda {|r| "#{r.fullname} - #{r.user.email}"}, input_html: {class: 'select2'} %>
+      <%= f.association :department, include_blank: :translate, input_html: {class: 'select2'} %>
+      <hr>
+
+      <%= f.input :description, input_html:{class:'tinymce'} %>
+    </div>
+  </div>
+
+  <div class="m-b-10">
+    <%= f.button :submit, class: 'btn-info' %>
+    <%= cancel_btn(ticket_templates_path) %>
+    <%= delete_btn(@ticket_template, class: 'float-md-right') %>
+  </div>
+<% end %>

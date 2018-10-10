@@ -1,0 +1,37 @@
+<%= header_btn(t("agents.edit.title"), edit_agent_path(@requester)) if can?(:update, Agent) %>
+
+<div class="row">
+  <!-- Column -->
+  <div class="col-lg-3 col-md-4">
+    <div class="card">
+      <div class="card-body">
+        <div class="m-t-30 text-center">
+          <%= image_tag @agent.user.avatar_path, class: 'img-circle', width: 150 %>
+          <h4 class="card-title m-t-10 text-center"><%= @agent.fullname %></h4>
+          <div class="row text-center justify-content-md-center">
+            <div class="col-4">
+              <a href="javascript:void(0)" class="link"><i class="fas fa-ticket-alt"></i> <span class="font-medium"><%= @agent.tickets.count %></span></a>
+            </div>
+            <div class="col-4">
+              <a href="javascript:void(0)" class="link"><i class="fas fa-reply"></i> <span class="font-medium"><%= @agent.ticket_replies.count %></span></a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <hr>
+      </div>
+      <div class="card-body">
+        <small class="text-muted"><%= t 'activerecord.attributes.user.email' %></small>
+        <h6><%= @agent.user.email %></h6>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-lg-9 col-md-8">
+    <div class="card">
+      <div class="card-body"></div>
+    </div>
+  </div>
+  <!-- Column -->
+</div>

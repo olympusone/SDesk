@@ -9,9 +9,9 @@ en:
         id: 'ID'
   ticket_replies:
     create:
-      success: 'Ticket Reply <b>%{value}</b> created successfully'
+      success: 'Ticket Reply created successfully'
     update:
-      success: 'Ticket Reply <b>%{value}</b> updated successfully'
+      success: 'Ticket Reply updated successfully'
     destroy:
-      success: 'Ticket Reply <b>%{value}</b> deleted successfully'
-      error: 'Ticket Reply <b>%{value}</b> is not deleted'
+      success: 'Ticket Reply deleted successfully'
+      error: 'Ticket Reply is not deleted'

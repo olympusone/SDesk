@@ -8,6 +8,7 @@
  *= require perfect-scrollbar.min
  *= require toastr/toastr.scss
 */
+
 @import 'bootstrap-datetimepicker.min';
 @import "cp/style";
 @import "cp/tabs";
@@ -52,4 +53,34 @@ body.passwords
   position: absolute;
   background: #fff;
   z-index: 10;
+}
+
+.ticket-reply-wrapper{
+  margin-bottom: 15px;
+
+  &.justify-content-end .ticket-reply-inner{
+    width: 100%;
+  }
+
+  .ticket-reply-inner{
+    background: #ecf0f1;
+    border-radius: 5px;
+    padding: 10px;
+    max-width: 60%;
+    min-width: 300px;
+  }
+}
+
+#ticket-reply-holder{
+  .ticket_reply_content{
+    display: flex;
+    justify-content: end;
+  }
+
+  textarea{
+    border-radius: 5px;
+    padding: 10px;
+    max-width: 60%;
+    min-width: 300px;
+  }
 }

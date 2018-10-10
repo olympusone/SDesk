@@ -25,8 +25,8 @@ class AdminDatatable < AjaxDatatablesRails::Base
       end
 
       {
-          name: link_to(record.name, record),
-          lastname: link_to(record.lastname, record),
+          name: record.name,
+          lastname: record.lastname,
           email: record.user.email,
           state: state.join(" ").html_safe,
           actions: _actions,

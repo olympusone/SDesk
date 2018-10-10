@@ -14,6 +14,7 @@
             <%= f.association :requester, include_blank: :translate, label_method: lambda{|r| "#{r.fullname} - #{r.user.email}"}, input_html: {class: 'select2'} %>
           <% end %>
 
+          <%= f.association :ticket_template, include_blank: :translate, input_html: {class: 'select2'} %>
           <%= f.input :subject %>
           <%= f.input :tags, input_html: {class: 'tagsinput'} %>
           <hr>
@@ -50,7 +51,30 @@
           <%= f.link_to_add icon('fas', 'plus', t('activerecord.models.file_attachment.one')), :file_attachments, data: {target: '#ticket-files'}, class: 'mt-2 btn btn-info' %>
         </div>
       </div>
+
+      <% if @ticket.persisted? %>
+        <div class="card">
+          <div class="card-header">
+            <%= t 'activerecord.models.ticket_reply.other' %>
+          </div>
+          <div class="card-body">
+            <div id="ticket-replies">
+              <% @ticket.ticket_replies.each do |r| %>
+                <%= render 'ticket_replies/ticket_reply', ticket_reply: r %>
+              <% end %>
+            </div>
+
+            <div id="ticket-reply-holder"></div>
+            <hr>
+
+            <div class="text-center">
+              <%= link_to icon('fas', 'plus', t('ticket_replies.new.title')), new_ticket_ticket_reply_path(@ticket), remote: true, class: 'mt-2 btn btn-primary' %>
+            </div>
+          </div>
+        </div>
+      <% end %>
     </div>
+
     <div class="col-md-3">
       <div class="card">
         <div class="card-body">
@@ -69,10 +93,56 @@
     </div>
   </div>
 
-
-
   <div class="m-b-10">
     <%= f.button :submit, class: 'btn-info' %>
     <%= cancel_btn(root_path) %>
+    <%= delete_btn(@ticket, class: 'float-md-right') %>
   </div>
+<% end %>
+
+<% content_for :javascript_code do %>
+<script>
+  $(function () {
+      $('#ticket_ticket_template_id').change(function () {
+          let id = $(this).val();
+
+          if(id){
+              $.get(Routes.ticket_template_path(I18n.locale, id), function (data) {
+                  if(data){
+                      let template = data.ticket_template;
+
+                      template.subject && $('#ticket_subject').val(template.subject);
+
+                      if(template.tags){
+                          _.each(template.tags.split(','), function (v) {
+                              $('#ticket_tags').tagsinput('add', v);
+                          });
+                      }
+
+                      template.description && tinyMCE.get('ticket_description').setContent(template.description);
+                      template.department_id && $('#ticket_department_id').val(template.department_id).change();
+                      template.agent_id && $('#ticket_agent_id').val(template.agent_id).change();
+                      template.priority && $('#ticket_priority').val(template.priority).change();
+                      template.state && $('#ticket_state').val(template.state).change();
+                  }
+              });
+          }
+      });
+
+      $(document).on('click', '#ticket-reply-holder .btn', function (e) {
+          e.preventDefault();
+          let form = $('#ticket-reply-holder');
+
+          let ticket_id = form.find('#ticket_reply_ticket_id').val();
+
+          let data = {
+              ticket_reply: {
+                  content: form.find('#ticket_reply_content').val()
+              }
+          };
+
+          $.post(Routes.ticket_ticket_replies_path(ticket_id), data);
+      });
+  });
+</script>
 <% end %>

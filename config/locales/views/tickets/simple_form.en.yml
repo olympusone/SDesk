@@ -10,3 +10,4 @@ en:
         department: 'Select Department..'
         agent: 'Select Agent..'
         requester: 'Select Requester..'
+        ticket_template: 'Select Ticket Template..'

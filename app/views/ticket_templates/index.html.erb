@@ -1,0 +1,35 @@
+<%= header_btn(t("ticket_templates.new.title"), new_ticket_template_path) if can?(:create, TicketTemplate) %>
+
+<div class="card">
+  <div class="card-body">
+    <table id="ticket_templates_datatable" class="display nowrap table table-hover dataTable" data-source="<%= ticket_templates_path(format: :json) %>">
+      <thead>
+      <tr>
+        <th><%= t 'activerecord.attributes.ticket_template.name' %></th>
+        <th><%= t 'activerecord.attributes.ticket_template.subject' %></th>
+        <th class="text-center"><%= t 'activerecord.attributes.ticket_template.active' %></th>
+        <th class="dt-options"></th>
+      </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+
+<% content_for :javascript_code do %>
+  <script>
+      var params = {
+          columns: [
+              {data: 'name'},
+              {data: 'subject'},
+              {data: 'active'},
+              {data: 'actions'},
+          ]
+      };
+
+      initDatatable($('#ticket_templates_datatable'), params);
+  </script>
+<% end %>

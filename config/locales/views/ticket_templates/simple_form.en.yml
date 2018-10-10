@@ -4,3 +4,8 @@ en:
       ticket_template:
         create: 'Create'
         update: 'Update'
+  simple_form:
+    include_blanks:
+      ticket_template:
+        department: 'Select Department..'
+        agent: 'Select Agent..'

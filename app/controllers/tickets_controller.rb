@@ -1,6 +1,8 @@
 class TicketsController < ApplicationController
-  # load_and_authorize_resource
-  # before_action :authenticate_user!, except: [:new, :create]
+  load_and_authorize_resource
+  before_action :authenticate_user!, except: [:new, :create]
+
+  add_breadcrumb I18n.t('activerecord.models.ticket.other'), :tickets_path
 
   def index
     respond_to do |format|

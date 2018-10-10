@@ -6,8 +6,7 @@ en:
         other: 'Companies'
     attributes:
       company:
-        id: 'ID'
-        companyname: 'Companyname'
+        name: 'Name'
   companies:
     create:
       success: 'Company <b>%{value}</b> created successfully'

@@ -9,8 +9,8 @@ class TicketDatatable < AjaxDatatablesRails::Base
         agent: {source: 'Agent.lastname'},
         department: {source: 'Department.name'},
         subject: {source: 'Ticket.subject'},
-        priority: {source: 'Ticket.priority'},
-        state: {source: 'Ticket.state'},
+        priority: {source: 'Ticket.priority', searchable: false},
+        state: {source: 'Ticket.state', searchable: false},
         actions: {orderable: false, searchable: false},
     }
   end

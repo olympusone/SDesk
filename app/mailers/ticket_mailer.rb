@@ -19,4 +19,12 @@ class TicketMailer < ApplicationMailer
 
     mail(to: @requester.user.email, subject: "A ticket No: #{@ticket.id} has closed!".html_safe)
   end
+
+  def ticket_reply_email ticket_reply
+    @ticket_reply = ticket_reply
+    @ticket = @ticket_reply.ticket
+    @requester = @ticket.requester
+
+    mail(to: @requester.user.email, subject: "New reply on ticket No: #{@ticket.id} has submitted!".html_safe)
+  end
 end

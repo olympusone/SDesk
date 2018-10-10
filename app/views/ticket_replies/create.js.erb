@@ -1,0 +1,15 @@
+<% if notice || alert %>
+toastr['<%= notice ? 'success' : 'warning' %>']('<%= (notice || alert).html_safe %>', {
+    "closeButton": true,
+    "newestOnTop": true,
+    "progressBar": true,
+    "preventDuplicates": true
+});
+<% end %>
+
+<% if @ticket_reply.persisted? %>
+let form = $('#ticket-reply-holder');
+form.empty();
+
+$('#ticket-replies').append("<%= j render 'ticket_replies/ticket_reply', ticket_reply: @ticket_reply %>");
+<% end %>

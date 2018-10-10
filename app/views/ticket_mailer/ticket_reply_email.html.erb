@@ -1,0 +1,18 @@
+Mr/Miss <b><%= @requester.fullname %></b>.
+
+<p>
+  Your ticket with id  <%= @ticket.id %> has new reply from <%= @ticket_reply.replier.fullname %>.
+</p>
+
+<hr>
+
+<%= @ticket_reply.content.html_safe %>
+
+<hr>
+
+<p>
+  Please do NOT reply unless you wish to re-open the matter.
+</p>
+
+With Regards,<br>
+SDesk

@@ -16,10 +16,10 @@ Rails.application.routes.draw do
     root 'dashboard#index'#, constraints: lambda { |request| request.env['warden'].user.present?}
     # root 'tickets#new'
 
-    resources :admins
+    resources :admins, except: :show
     resources :agents
 
-    resource :setting
+    resource :setting, except: :show
 
     get '/knowledge-base', to: 'solutions#knowledge_base'
     resources :solutions
@@ -28,7 +28,7 @@ Rails.application.routes.draw do
 
     resources :ticket_templates
     resources :tickets, shallow: true do
-      resources :ticket_replies
+      resources :ticket_replies, only: [:new, :create, :show]
     end
 
     resources :requesters

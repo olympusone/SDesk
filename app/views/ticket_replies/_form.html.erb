@@ -1,0 +1,8 @@
+<%= simple_form_for [@ticket, @ticket_reply] do |tr| %>
+  <%= tr.input :ticket_id, as: :hidden %>
+  <%= tr.input :content, label: false %>
+
+  <div class="text-right">
+    <%= tr.button :submit, class: 'btn-success' %>
+  </div>
+<% end %>
