@@ -11,7 +11,9 @@ class Ability
       can :manage, Requester
       can :manage, [SolutionCategory, SolutionFolder, Solution]
     elsif user.role? :requester
-      can [:read, :create, :update], Ticket
+      can :update, Requester, id: user.user_id
+      can :create, Ticket
+      can [:read, :update], Ticket, requester_id: user.user_id
       can :read, [SolutionCategory, SolutionFolder, Solution]
     else
       can :create, Ticket
