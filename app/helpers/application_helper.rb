@@ -81,19 +81,19 @@ module ApplicationHelper
 
   def table_edit_btn(record, options = {})
     if can?(:edit, record)
-      link_to(icon('fas', 'edit'), {id: record.id, action: :edit, controller: record.model_name.route_key}, class: 'btn-sm btn btn-warning btn-circle', remote: options[:remote].present?, data: {skin: 'dark', toggle: 'tooltip', placement: 'top'}, title: t('datatable.edit'))
+      link_to(icon('fas', 'edit'), {id: record.id, action: :edit, controller: record.model_name.route_key}, class: 'btn btn-sm btn-icon btn-warning btn-outline ', remote: options[:remote].present?, data: {skin: 'dark', toggle: 'tooltip', placement: 'top'}, title: t('datatable.edit'))
     end
   end
 
   def table_show_btn(record, options = {})
     if can?(:show, record)
-      link_to(icon('fas', 'info'), record, class: 'btn-sm btn btn-info btn-circle', remote: options[:remote].present?, data: {skin: 'dark', toggle: 'tooltip', placement: 'top'}, title: t('datatable.show'))
+      link_to(icon('fas', 'info'), record, class: 'btn btn-sm btn-icon btn-info btn-outline ', remote: options[:remote].present?, data: {skin: 'dark', toggle: 'tooltip', placement: 'top'}, title: t('datatable.show'))
     end
   end
 
   def table_destroy_btn(record, options = {})
     if can?(:destroy, record)
-      link_to(icon('fas', 'times'), send("#{record.model_name.param_key}_path", record.id), class: 'btn-sm btn btn-danger btn-circle', method: :delete, remote: options[:remote].present?, title: t('datatable.delete'), data: {skin: 'dark', toggle: 'tooltip', placement: 'top', confirm: t('confirmation.delete')})
+      link_to(icon('fas', 'times'), send("#{record.model_name.param_key}_path", record.id), class: 'btn btn-sm btn-icon btn-danger btn-outline ', method: :delete, remote: options[:remote].present?, title: t('datatable.delete'), data: {skin: 'dark', toggle: 'tooltip', placement: 'top', confirm: t('confirmation.delete')})
     end
   end
 

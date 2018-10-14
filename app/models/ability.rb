@@ -6,8 +6,10 @@ class Ability
     if user.role? :admin
       can :manage, :all
     elsif user.role? :agent
-      can :manage, :all
-      cannot :manage, Admin
+      can :update, Agent, id: user.user_id
+      can :manage, [Ticket, TicketTemplate]
+      can :manage, Requester
+      can :manage, [SolutionCategory, SolutionFolder, Solution]
     elsif user.role? :requester
       can [:read, :create, :update], Ticket
       can :read, [SolutionCategory, SolutionFolder, Solution]

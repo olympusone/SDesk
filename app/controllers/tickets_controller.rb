@@ -38,10 +38,6 @@ class TicketsController < ApplicationController
     end
   end
 
-  def show
-
-  end
-
   def edit
     @ticket = Ticket.find(params[:id])
   end

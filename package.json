@@ -3,6 +3,7 @@
   "private": true,
   "dependencies": {
     "bootstrap-tagsinput": "^0.7.1",
+    "chart.js": "^2.7.2",
     "fastclick": "^1.0.6",
     "icheck": "^1.0.2",
     "ionicons": "^4.3.0",

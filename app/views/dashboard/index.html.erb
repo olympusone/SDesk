@@ -1,0 +1,130 @@
+<div class="row">
+  <!-- Column -->
+  <div class="col-lg-3 col-md-6">
+    <div class="card">
+      <div class="d-flex flex-row">
+        <div class="p-10 bg-info">
+          <h3 class="text-white box m-b-0"><i class="fas fa-ticket-alt"></i></h3></div>
+        <div class="align-self-center m-l-20">
+          <h3 class="m-b-0 text-info"><%= @tickets_count.values.sum %></h3>
+          <h5 class="text-muted m-b-0">Total Tickets</h5></div>
+      </div>
+    </div>
+  </div>
+  <!-- Column -->
+  <!-- Column -->
+  <div class="col-lg-3 col-md-6">
+    <div class="card">
+      <div class="d-flex flex-row">
+        <div class="p-10 bg-warning">
+          <h3 class="text-white box m-b-0"><i class="fas fa-envelope"></i></h3></div>
+        <div class="align-self-center m-l-20">
+          <h3 class="m-b-0 text-warning"><%= @tickets_count['pending'] %></h3>
+          <h5 class="text-muted m-b-0">Pending Tickets</h5></div>
+      </div>
+    </div>
+  </div>
+  <!-- Column -->
+  <!-- Column -->
+  <div class="col-lg-3 col-md-6">
+    <div class="card">
+      <div class="d-flex flex-row">
+        <div class="p-10 bg-cyan">
+          <h3 class="text-white box m-b-0"><i class="fas fa-lock-open"></i></h3></div>
+        <div class="align-self-center m-l-20">
+          <h3 class="m-b-0"><%= @tickets_count['open'] %></h3>
+          <h5 class="text-muted m-b-0">Open Tickets</h5></div>
+      </div>
+    </div>
+  </div>
+  <!-- Column -->
+  <!-- Column -->
+  <div class="col-lg-3 col-md-6">
+    <div class="card">
+      <div class="d-flex flex-row">
+        <div class="p-10 bg-success">
+          <h3 class="text-white box m-b-0"><i class="fas fa-lock"></i></h3></div>
+        <div class="align-self-center m-l-20">
+          <h3 class="m-b-0 text-success"><%= @tickets_count['closed'] %></h3>
+          <h5 class="text-muted m-b-0">Closed Tickets</h5></div>
+      </div>
+    </div>
+  </div>
+  <!-- Column -->
+</div>
+
+
+<div class="card">
+  <div class="card-body">
+    <canvas id="ticketChart" height="400"></canvas>
+  </div>
+</div>
+
+
+<div class="card">
+  <div class="card-body">
+
+    <h4 class="card-title">Latest Tickets</h4>
+    <div class="table-responsive">
+      <table class="table stylish-table">
+        <thead>
+        <tr>
+          <th>ID#</th>
+          <th>Subject</th>
+          <th>Date</th>
+          <th>State</th>
+          <th>Priority</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% @latest_tickets.each do |t| %>
+          <tr>
+            <td><%= t.id %></td>
+            <td>
+              <h5><%= link_to t.subject, edit_ticket_path(t), class: 'link' %></h5>
+            </td>
+            <td>
+              <h5><%= t.created_at.to_s %></h5>
+            </td>
+            <td>
+              <h5><%= t.state_text %></h5>
+            </td>
+            <td>
+              <h5><%= t.priority_text %></h5>
+            </td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<% content_for :javascript_code do %>
+<script>
+    let ctx = document.getElementById("ticketChart");
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: [1,2],
+            datasets: [
+                {
+                    label: "New Tickets",
+                    data: [3,55]
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });
+</script>
+<% end %>

@@ -26,13 +26,13 @@ Rails.application.routes.draw do
     resources :solution_folders
     resources :solution_categories
 
-    resources :ticket_templates
-    resources :tickets, shallow: true do
+    resources :ticket_templates, except: :show
+    resources :tickets, except: :show, shallow: true do
       resources :ticket_replies, only: [:new, :create, :show]
     end
 
     resources :requesters
-    resources :companies
+    resources :companies, except: :show
     resources :departments, except: :show
   end
 end

@@ -1,5 +1,5 @@
 class TicketDatatable < AjaxDatatablesRails::Base
-  def_delegators :@view, :table_actions, :current_user, :icon, :link_to, :link_to_if, :can?
+  def_delegators :@view, :table_actions, :current_user, :icon, :link_to, :link_to_if, :can?, :edit_ticket_path
 
   def view_columns
     # Declare strings in this format: ModelName.column_name
@@ -21,7 +21,7 @@ class TicketDatatable < AjaxDatatablesRails::Base
           requester: link_to_if(can?(:show, record.requester), record.requester.try(:lastname), record.requester, target: :blank),
           agent: link_to_if((record.agent && can?(:read, record.agent)), record.agent.try(:lastname), record.agent, target: :blank),
           department: record.department.try(:name),
-          subject: link_to(record.subject, record),
+          subject: link_to(record.subject, edit_ticket_path(record)),
           priority: record.priority_text,
           state: record.state_text,
           actions: table_actions(record, :edit, destroy: {remote: true}),
