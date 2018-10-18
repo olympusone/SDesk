@@ -1,7 +1,7 @@
 en:
   solutions:
     knowledge_base:
-      index: 'Knowledge Base'
+      title: 'Knowledge Base'
     index:
       title: 'Solution List'
     new:

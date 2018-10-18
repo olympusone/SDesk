@@ -1,9 +1,13 @@
 class SolutionsController < ApplicationController
   load_and_authorize_resource
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: [:knowledge_base]
 
-  add_breadcrumb I18n.t('solutions.knowledge_base.index')
-  add_breadcrumb I18n.t('activerecord.models.solution.other'), :solutions_path
+  add_breadcrumb I18n.t('solutions.knowledge_base.title')
+  add_breadcrumb I18n.t('activerecord.models.solution.other'), :solutions_path, if: :user_signed_in?
+
+  def knowledge_base
+    @solution_categories = SolutionCategory.joins(:solution_folders).group('solution_categories.id').order('solution_categories.name')
+  end
 
   def index
     respond_to do |format|

@@ -17,6 +17,7 @@ class Ability
       can :read, [SolutionCategory, SolutionFolder, Solution]
     else
       can :create, Ticket
+      can :knowledge_base, Solution
       can :read, [SolutionCategory, SolutionFolder, Solution]
     end
   end

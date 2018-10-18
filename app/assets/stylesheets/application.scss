@@ -84,3 +84,41 @@ body.passwords
     min-width: 300px;
   }
 }
+
+.solution-folders{
+  display: flex;
+  flex-flow: row wrap;
+
+  &:after{
+    content: '';
+    flex-grow: 1;
+  }
+
+  .solution-folder{
+    height: 100px;
+    width: 120px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    margin: 10px;
+    text-align: center;
+
+    &:hover i{
+      color: #1abc9c;
+    }
+
+    i{
+      position: absolute;
+      font-size: 120px;
+      color: #16a085;
+    }
+
+    span{
+      z-index: 1;
+      color: white;
+      font-size: 14px;
+    }
+  }
+}

@@ -1,0 +1,24 @@
+<div class="accordion">
+  <% @solution_categories.each do |s| %>
+    <div class="card mb-2">
+      <div class="card-header bg-white p-0" id="solutionCategoryHeader<%= s.id %>">
+        <div class="card-header bg-info">
+          <a class="collapsed text-white" href="#" data-toggle="collapse" data-target="#solutionCategory<%= s.id %>" aria-expanded="false" aria-controls="collapseSolutionCategory<%= s.id %>">
+            <%= s.name %>
+          </a>
+        </div>
+      </div>
+
+      <div id="solutionCategory<%= s.id %>" class="collapse" aria-labelledby="solutionCategoryHeader<%= s.id %>" style="">
+          <div class="solution-folders">
+            <% s.solution_folders.each do |f| %>
+              <%= link_to f, class: 'solution-folder' do %>
+                <%= icon 'fas', 'folder' %>
+                <span><%= f.name %></span>
+              <% end %>
+            <% end %>
+          </div>
+      </div>
+    </div>
+  <% end %>
+</div>

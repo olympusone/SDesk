@@ -1,7 +1,11 @@
 <div class="container m-t-40 m-b-40">
   <div class="row justify-content-center align-items-center">
 
-    <div class="col-md-4">
+    <div class="col-4 hidden-md-down">
+      <%= image_tag 'login.png', lazy: true, class:'img-responsive' %>
+    </div>
+
+    <div class="col-md-6 col-lg-5">
       <div class="card">
         <div class="card-body">
           <h4 class="card-title text-center"><%= t 'devise.sessions.title' %></h4>
