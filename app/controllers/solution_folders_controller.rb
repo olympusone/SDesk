@@ -1,8 +1,8 @@
 class SolutionFoldersController < ApplicationController
   load_and_authorize_resource
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: :show
 
-  add_breadcrumb I18n.t('solutions.knowledge_base.index')
+  add_breadcrumb I18n.t('solutions.knowledge_base.title')
   add_breadcrumb I18n.t('activerecord.models.solution_folder.other'), :solution_folders_path
 
   def index
@@ -23,6 +23,11 @@ class SolutionFoldersController < ApplicationController
 
     flash.now[:notice] = t('.success', value: @solution_folder.name) if @solution_folder.save
     render 'shared/js/save', locals: {resource: @solution_folder}
+  end
+
+  def show
+    @solution_folder = SolutionFolder.find(params[:id])
+    @solutions = @solution_folder.solutions
   end
 
   def edit

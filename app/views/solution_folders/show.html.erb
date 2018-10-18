@@ -1,0 +1,3 @@
+<% @solutions.each do |s| %>
+  <%= link_to can?(:show, s), s.name %>
+<% end %>

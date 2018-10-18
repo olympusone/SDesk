@@ -2,7 +2,7 @@ class SolutionCategoriesController < ApplicationController
   load_and_authorize_resource
   before_action :authenticate_user!
 
-  add_breadcrumb I18n.t('solutions.knowledge_base.index')
+  add_breadcrumb I18n.t('solutions.knowledge_base.title')
   add_breadcrumb I18n.t('activerecord.models.solution_category.other'), :solution_categories_path
 
   def index
