@@ -1,3 +1,7 @@
-<% @solutions.each do |s| %>
-  <%= link_to can?(:show, s), s.name %>
-<% end %>
+<div class="card">
+  <div class="list-group">
+    <% @solutions.each do |s| %>
+      <%= link_to_if can?(:show, s), s.title, s, class:'list-group-item' %>
+    <% end %>
+  </div>
+</div>

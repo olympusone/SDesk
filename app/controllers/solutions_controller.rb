@@ -1,6 +1,6 @@
 class SolutionsController < ApplicationController
   load_and_authorize_resource
-  before_action :authenticate_user!, except: [:knowledge_base]
+  before_action :authenticate_user!, except: [:show, :knowledge_base]
 
   add_breadcrumb I18n.t('solutions.knowledge_base.title')
   add_breadcrumb I18n.t('activerecord.models.solution.other'), :solutions_path, if: :user_signed_in?
@@ -29,6 +29,12 @@ class SolutionsController < ApplicationController
     else
       render :edit
     end
+  end
+
+  def show
+    add_breadcrumb I18n.t('activerecord.models.solution.other')
+
+    @solution = Solution.find(params[:id])
   end
 
   def edit

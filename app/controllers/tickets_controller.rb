@@ -7,7 +7,7 @@ class TicketsController < ApplicationController
   def index
     respond_to do |format|
       format.html
-      format.json { render json: TicketDatatable.new(view_context) }
+      format.json {render json: TicketDatatable.new(view_context)}
     end
   end
 
@@ -22,12 +22,10 @@ class TicketsController < ApplicationController
   def create
     @ticket = Ticket.new(ticket_params)
 
-    unless user_signed_in?
-      @ticket.requester = Requester.includes(:user).references(:users).find_by(users:{email: @ticket.email})
-    end
-
-    if user_signed_in? && current_user.role?(:requester)
-      @ticket.requester = current_user.user
+    if user_signed_in?
+      @ticket.requester = current_user.user if current_user.role?(:requester)
+    else
+      @ticket.requester = Requester.includes(:user).references(:users).find_by(users: {email: @ticket.email})
     end
 
     if @ticket.save
@@ -67,18 +65,19 @@ class TicketsController < ApplicationController
   end
 
   private
+
   def ticket_params
     if user_signed_in?
       if current_user.role? :requester
         params.require(:ticket).permit(:department_id, :subject, :priority, :description, :tags,
-                                       file_attachments_attributes:[:id, :_destroy, :file])
+                                       file_attachments_attributes: [:id, :_destroy, :file])
       else
         params.require(:ticket).permit(:requester_id, :agent_id, :department_id, :priority, :state, :tags, :subject, :description,
-                                       file_attachments_attributes:[:id, :_destroy, :file])
+                                       file_attachments_attributes: [:id, :_destroy, :file])
       end
     else
       params.require(:ticket).permit(:email, :department_id, :priority, :tags, :subject, :description,
-                                     file_attachments_attributes:[:id, :_destroy, :file])
+                                     file_attachments_attributes: [:id, :_destroy, :file])
     end
   end
 end

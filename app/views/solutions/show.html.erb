@@ -1,0 +1,20 @@
+<div class="row">
+  <div class="col-md-8">
+    <div class="card">
+      <div class="card-header"><%= @solution.title %></div>
+      <div class="card-body">
+        <%= @solution.content %>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="card">
+      <div class="card-header"><%= t 'activerecord.models.file_attachment.other' %></div>
+      <ul class="list-group">
+        <% @solution.file_attachments.each do | f | %>
+          <li class="list-group-item"><%= link_to icon('fas', 'download'), rails_blob_path(f.file, disposition: "attachment") %> <%= f.file.blob.filename %></li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</div>
