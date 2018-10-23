@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   }
 
   devise_scope :user do
-    get '/admin', to: 'devise/sessions#new'
+    get '/login', to: 'devise/sessions#new'
   end
 
   root 'dashboard#index' #, constraints: lambda { |request| request.env['warden'].user.present?}
@@ -25,7 +25,7 @@ Rails.application.routes.draw do
   resources :solution_folders
   resources :solution_categories
 
-  resources :ticket_templates, except: :show
+  resources :ticket_templates
   resources :tickets, except: :show, shallow: true do
     resources :ticket_replies, only: [:new, :create, :show]
   end
