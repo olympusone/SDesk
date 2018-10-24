@@ -120,22 +120,9 @@
             </li>
           <% end %>
 
-          <% if can?(:index, SolutionCategory) || can?(:index, SolutionFolder) || can?(:index, Solution) %>
+          <% if can?(:read, Solution) %>
             <li>
-              <%= link_to icon('fas', 'cogs', t('solutions.knowledge_base.title')), 'javascript:void(0)', class: 'has-arrow waves-effect waves-dark' %>
-              <ul aria-expanded="false" class="collapse">
-                <% if can?(:index, SolutionCategory) %>
-                  <li><%= link_to t('activerecord.models.solution_category.other'), solution_categories_path %></li>
-                <% end %>
-
-                <% if can?(:index, SolutionFolder) %>
-                  <li><%= link_to t('activerecord.models.solution_folder.other'), solution_folders_path %></li>
-                <% end %>
-
-                <% if can?(:index, Solution) %>
-                  <li><%= link_to t('activerecord.models.solution.other'), solutions_path %></li>
-                <% end %>
-              </ul>
+              <%= link_to icon('fas', 'book', t('solutions.knowledge_base.title')), knowledge_base_path, class: 'waves-effect waves-dark' %>
             </li>
           <% end %>
 

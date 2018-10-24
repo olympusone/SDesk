@@ -9,6 +9,8 @@ gem 'jquery-rails'
 gem 'simple_form'
 gem 'nested_form'
 
+gem 'sunspot_rails'
+
 gem 'font-awesome-sass', '~> 5.0.13'
 
 gem "js-routes"
@@ -96,6 +98,8 @@ group :development do
 
   gem 'brakeman', :require => false
   gem 'puma', '~> 3.11'
+
+  gem 'sunspot_solr'
 end
 
 group :production do

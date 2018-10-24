@@ -2,9 +2,6 @@ class SolutionFoldersController < ApplicationController
   load_and_authorize_resource
   before_action :authenticate_user!, except: :show
 
-  add_breadcrumb I18n.t('solutions.knowledge_base.title')
-  add_breadcrumb I18n.t('activerecord.models.solution_folder.other'), :solution_folders_path
-
   def index
     respond_to do |format|
       format.html

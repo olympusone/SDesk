@@ -17,6 +17,8 @@
       var locale = "<%= I18n.locale %>";
       var fallbacks = true;
   </script>
+
+  <%= javascript_include_tag 'application' %>
 </head>
 
 <body class="<%= controller_name %> <%= action_name %> horizontal-nav skin-default fixed-layout">
@@ -58,8 +60,7 @@
     © <%= Date.current.year %> Developed by Kitrmiridis Pantelis
   </footer>
 </div>
-
-<%= javascript_include_tag 'application' %>
+</body>
 
 <script>
     tinyMCE.init({
@@ -86,5 +87,4 @@
 </script>
 
 <%= yield :javascript_code %>
-</body>
 </html>

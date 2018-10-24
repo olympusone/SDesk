@@ -15,10 +15,10 @@ class Ability
       can :create, Ticket
       can [:read, :update], Ticket, requester_id: user.user_id
       can :read, [SolutionCategory, SolutionFolder, Solution]
-      can :knowledge_base, Solution
+      can [:knowledge_base, :search], Solution
     else
       can :create, Ticket
-      can [:knowledge_base, :show], Solution
+      can [:knowledge_base, :show, :search], Solution
       can :read, [SolutionCategory, SolutionFolder, Solution]
     end
   end

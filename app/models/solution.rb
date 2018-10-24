@@ -4,6 +4,10 @@ class Solution < ApplicationRecord
   validates :title, presence: true, uniqueness: {case_sensitive: false}
   validates_associated :solution_folder
 
+  searchable do
+    text :title, :content, :tags
+  end
+
   belongs_to :solution_folder
   has_many :file_attachments, as: :resource, dependent: :destroy
 

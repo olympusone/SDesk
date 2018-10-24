@@ -24,6 +24,9 @@
             <%= setting_input f, :mail_server_port, @settings, wrapper_html: {class: 'col-sm-6'} %>
             <%= setting_input f, :mail_server_username, @settings, wrapper_html: {class: 'col-sm-6'} %>
             <%= setting_input f, :mail_server_password, @settings, wrapper_html: {class: 'col-sm-6'} %>
+            <%= setting_input f, :mail_server_enable_ssl, @settings, as: :boolean, wrapper_html: {class: 'col-sm-6'} %>
+            <%= setting_input f, :mail_server_authentication, @settings, wrapper_html: {class: 'col-sm-6'} %>
+            <%= setting_input f, :mail_server_enable_starttls_auto, @settings, as: :boolean, wrapper_html: {class: 'col-sm-6'} %>
           </div>
         </div>
       </div>

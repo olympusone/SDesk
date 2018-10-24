@@ -1,18 +1,67 @@
-<%= header_btn(t("solutions.new.title"), new_solution_path) if can?(:create, Solution) %>
-
 <div class="card">
-  <div class="card-body">
-    <table id="solutions_datatable" class="table table-hover dataTable" data-source="<%= solutions_path(format: :json) %>">
-      <thead>
-      <tr>
-        <th><%= t 'activerecord.attributes.solution.title' %></th>
-        <th><%= t 'activerecord.models.solution_folder.other' %></th>
-        <th class="dt-options"></th>
-      </tr>
-      </thead>
-      <tbody>
-      </tbody>
-    </table>
+  <ul class="nav nav-tabs customtab" role="tablist">
+    <li class="nav-item">
+      <a class="nav-link active" data-toggle="tab" href="#solution-categories" role="tab"><%= t 'activerecord.models.solution_category.other' %></a>
+    </li>
+
+    <li class="nav-item">
+      <a class="nav-link" data-toggle="tab" href="#solution-folders" role="tab"><%= t 'activerecord.models.solution_folder.other' %></a>
+    </li>
+
+    <li class="nav-item">
+      <a class="nav-link" data-toggle="tab" href="#solutions" role="tab"><%= t 'activerecord.models.solution.other' %></a>
+    </li>
+  </ul>
+
+  <div class="tab-content">
+    <div class="tab-pane active" id="solution-categories" role="tabpanel">
+      <div class="p-20">
+        <%= link_to icon('fas', 'plus', t('solution_categories.new.title')), new_solution_category_path, remote: true, class:'btn btn-info' %>
+
+        <table id="solution_categories_datatable" class="table table-hover dataTable" data-source="<%= solution_categories_path(format: :json) %>">
+          <thead>
+          <tr>
+            <th><%= t 'activerecord.attributes.solution_category.name' %></th>
+            <th class="dt-options"></th>
+          </tr>
+          </thead>
+          <tbody>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="tab-pane  p-20" id="solution-folders" role="tabpanel">
+      <%= link_to icon('fas', 'plus', t('solution_folders.new.title')), new_solution_folder_path, remote: true, class: 'btn btn-info' %>
+
+      <table id="solution_folders_datatable" class="table table-hover dataTable" data-source="<%= solution_folders_path(format: :json) %>">
+        <thead>
+        <tr>
+          <th><%= t 'activerecord.attributes.solution_folder.name' %></th>
+          <th><%= t 'activerecord.models.solution_category.other' %></th>
+          <th class="dt-options"></th>
+        </tr>
+        </thead>
+        <tbody>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="tab-pane p-20" id="solutions" role="tabpanel">
+      <%= link_to icon('fas', 'plus', t('solutions.new.title')), new_solution_path, class: 'btn btn-info' %>
+
+      <table id="solutions_datatable" class="table table-hover dataTable" data-source="<%= solutions_path(format: :json) %>">
+        <thead>
+        <tr>
+          <th><%= t 'activerecord.attributes.solution.title' %></th>
+          <th><%= t 'activerecord.models.solution_folder.other' %></th>
+          <th class="dt-options"></th>
+        </tr>
+        </thead>
+        <tbody>
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>
 
@@ -20,14 +69,27 @@
 
 <% content_for :javascript_code do %>
   <script>
-      var params = {
+      initDatatable($('#solution_categories_datatable'), {
+          columns: [
+              {data: 'name'},
+              {data: 'actions'},
+          ]
+      });
+
+      initDatatable($('#solution_folders_datatable'), {
+          columns: [
+              {data: 'name'},
+              {data: 'solution_category'},
+              {data: 'actions'},
+          ]
+      });
+
+      initDatatable($('#solutions_datatable'), {
           columns: [
               {data: 'title'},
               {data: 'solution_folder'},
               {data: 'actions'},
           ]
-      };
-
-      initDatatable($('#solutions_datatable'), params);
+      });
   </script>
 <% end %>

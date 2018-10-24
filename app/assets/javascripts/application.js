@@ -22,7 +22,8 @@
 //= require fastclick/lib/fastclick
 //= require select2/dist/js/select2
 
-//= require chart.js/dist/Chart.min
+//= require chart.js/dist/Chart.bundle
+//= require chartkick
 //= require perfect-scrollbar.jquery.min
 //= require waves
 //= require raphael/raphael.min

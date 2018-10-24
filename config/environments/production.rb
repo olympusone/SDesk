@@ -94,16 +94,6 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 
-  # Allowing hos
+  # Allowing host
   config.action_mailer.default_url_options = { host: "sdesk.olympusone.com" }
-
-  config.action_mailer.smtp_settings = {
-      address:              'srv1.olympusone.com',
-      port:                 587,
-      user_name:            'info@olympusone.com',
-      password:             'Dimidev89gr',
-      enable_ssl:           true,
-      authentication:       'plain',
-      enable_starttls_auto: true
-  }
 end

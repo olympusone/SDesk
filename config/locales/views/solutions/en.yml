@@ -14,3 +14,5 @@ en:
       title: 'Edit Solution'
     update:
       title: 'Edit Solution'
+    search:
+      title: 'Search Solution'

@@ -1,3 +1,16 @@
+<div class="card">
+  <div class="card-body">
+    <%= simple_form_for :search, url: knowledge_base_search_path, method: :get do |f| %>
+        <div class="input-group input-group-lg">
+          <div class="input-group-prepend">
+            <span class="input-group-text"><i class="fas fa-search"></i></span>
+          </div>
+          <%= f.input_field :text, class: 'form-control', required: true, label: false, placeholder: 'Enter criteria..' %>
+        </div>
+    <% end %>
+  </div>
+</div>
+
 <div class="accordion">
   <% @solution_categories.each do |s| %>
     <div class="card mb-2">

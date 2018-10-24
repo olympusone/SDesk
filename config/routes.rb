@@ -20,7 +20,11 @@ Rails.application.routes.draw do
 
   resource :setting, except: :show
 
-  get '/knowledge-base', to: 'solutions#knowledge_base'
+  scope 'knowledge-base', controller: 'solutions' do
+    get '/', action: 'knowledge_base', as: :knowledge_base
+    get 'search', action: 'search', as: :knowledge_base_search
+  end
+
   resources :solutions
   resources :solution_folders
   resources :solution_categories

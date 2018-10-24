@@ -10,6 +10,13 @@ en:
         location_address: 'Company Address'
         company_phone: 'Company Phone'
         company_email: 'Company Email'
+        mail_server_host: 'Host'
+        mail_server_port: 'Port'
+        mail_server_username: 'Username'
+        mail_server_password: 'Password'
+        mail_server_enable_ssl: 'Enable SSL'
+        mail_server_authentication: 'Authentication'
+        mail_server_enable_starttls_auto: 'Enable StartTLS Auto'
   settings:
     create:
       success: 'Setting successfully saved'
