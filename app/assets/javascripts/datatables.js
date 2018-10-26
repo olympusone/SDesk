@@ -194,5 +194,22 @@ function initDatatable(_table, params) {
     //     options.createdRow = createdRow;
     // }
 
-    window.datatables[table_id] = _table.DataTable(options);
+    let table = _table.DataTable(options);
+
+    window.datatables[table_id] = table;
+
+    // Apply footer search
+    if(_table.find('.footer-search').length){
+        table.columns().every( function () {
+            let that = this;
+
+            $('input, select', this.footer() ).on('keyup change', function (e) {
+                if((e.type === 'keyup' && e.keyCode === 13) || e.type === 'change'){
+                    if ( that.search() !== this.value ) {
+                        that.search( this.value ).draw();
+                    }
+                }
+            } );
+        } );
+    }
 }

@@ -20,6 +20,7 @@
 .dataTable{
   .dt-options{
     text-align: center;
+    white-space: nowrap;
 
     .btn-sm{
       width: 30px;
@@ -28,6 +29,10 @@
       margin: 0;
       padding: 0;
     }
+  }
+
+  .footer-search{
+    display: table-header-group;
   }
 }
 

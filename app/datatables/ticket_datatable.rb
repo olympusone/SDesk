@@ -9,8 +9,8 @@ class TicketDatatable < AjaxDatatablesRails::Base
         agent: {source: 'Agent.lastname'},
         department: {source: 'Department.name'},
         subject: {source: 'Ticket.subject'},
-        priority: {source: 'Ticket.priority', searchable: false},
-        state: {source: 'Ticket.state', searchable: false},
+        priority: {source: 'Ticket.priority'},
+        state: {source: 'Ticket.state'},
         actions: {orderable: false, searchable: false},
     }
   end
@@ -35,8 +35,15 @@ class TicketDatatable < AjaxDatatablesRails::Base
 
     query << "tickets.requester_id = #{current_user.user_id}" if current_user.role? :requester
 
+    if params[:agent_id].present?
+      query << "tickets.agent_id = #{params[:agent_id]}"
+    elsif params[:requester_id].present?
+      query << "tickets.requester_id = #{params[:requester_id]}"
+    end
+
     Ticket.dt_order(params)
         .includes(:requester, :agent, :department)
-        .references(:requesters, :agents, :departments).where(query.join(' AND ') || nil)
+        .references(:requesters, :agents, :departments)
+        .where(query.join(' AND ') || nil)
   end
 end

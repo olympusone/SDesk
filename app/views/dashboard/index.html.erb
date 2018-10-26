@@ -19,7 +19,7 @@
         <div class="p-10 bg-warning">
           <h3 class="text-white box m-b-0"><i class="fas fa-envelope"></i></h3></div>
         <div class="align-self-center m-l-20">
-          <h3 class="m-b-0 text-warning"><%= @tickets_count['pending'] %></h3>
+          <h3 class="m-b-0 text-warning"><%= @tickets_count['pending'] || 0 %></h3>
           <h5 class="text-muted m-b-0">Pending Tickets</h5></div>
       </div>
     </div>
@@ -32,7 +32,7 @@
         <div class="p-10 bg-cyan">
           <h3 class="text-white box m-b-0"><i class="fas fa-lock-open"></i></h3></div>
         <div class="align-self-center m-l-20">
-          <h3 class="m-b-0"><%= @tickets_count['open'] %></h3>
+          <h3 class="m-b-0"><%= @tickets_count['open'] || 0 %></h3>
           <h5 class="text-muted m-b-0">Open Tickets</h5></div>
       </div>
     </div>
@@ -45,7 +45,7 @@
         <div class="p-10 bg-success">
           <h3 class="text-white box m-b-0"><i class="fas fa-lock"></i></h3></div>
         <div class="align-self-center m-l-20">
-          <h3 class="m-b-0 text-success"><%= @tickets_count['closed'] %></h3>
+          <h3 class="m-b-0 text-success"><%= @tickets_count['closed'] || 0 %></h3>
           <h5 class="text-muted m-b-0">Closed Tickets</h5></div>
       </div>
     </div>

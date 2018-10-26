@@ -1,4 +1,4 @@
-<%= header_btn(t("agents.edit.title"), edit_agent_path(@requester)) if can?(:update, Agent) %>
+<%= header_btn(t("agents.edit.title"), edit_agent_path(@agent)) if can?(:update, Agent) %>
 
 <div class="row">
   <!-- Column -->
@@ -30,8 +30,49 @@
 
   <div class="col-lg-9 col-md-8">
     <div class="card">
-      <div class="card-body"></div>
+      <div class="card-body">
+        <table id="tickets_datatable" class="table table-hover dataTable" data-source="<%= tickets_path(agent_id: @agent.id, format: :json) %>">
+          <thead>
+          <tr>
+            <th><%= t 'activerecord.models.requester.one' %></th>
+            <th><%= t 'activerecord.models.agent.one' %></th>
+            <th><%= t 'activerecord.models.department.one' %></th>
+            <th><%= t 'activerecord.attributes.ticket.subject' %></th>
+            <th class="text-center"><%= t 'activerecord.attributes.ticket.priority' %></th>
+            <th class="text-center"><%= t 'activerecord.attributes.ticket.state' %></th>
+            <th class="dt-options"></th>
+          </tr>
+          </thead>
+          <tfoot class="footer-search">
+          <th><input class="form-control"></th>
+          <th><input class="form-control"></th>
+          <th><input class="form-control"></th>
+          <th><input class="form-control"></th>
+          <th><%= select_tag :priority, options_for_select(Ticket::PRIORITY), prompt: 'Select Priority..', class: 'form-control select2' %></th>
+          <th><%= select_tag :state, options_for_select(Ticket::STATE), prompt: 'Select State..', class: 'form-control select2' %></th>
+          <th></th>
+          </tfoot>
+          <tbody>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
   <!-- Column -->
 </div>
+
+<% content_for :javascript_code do %>
+  <script>
+      initDatatable($('#tickets_datatable'), {
+          columns: [
+              {data: 'requester'},
+              {data: 'agent'},
+              {data: 'department'},
+              {data: 'subject'},
+              {data: 'priority'},
+              {data: 'state'},
+              {data: 'actions'},
+          ]
+      });
+  </script>
+<% end %>
