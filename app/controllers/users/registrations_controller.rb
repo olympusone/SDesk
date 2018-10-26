@@ -28,11 +28,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
             if resource.active_for_authentication?
               set_flash_message! :notice, :signed_up
               sign_up(resource_name, resource)
-              respond_with resource, location: after_sign_up_path_for(resource)
+              respond_with resource, location: login_path
             else
               set_flash_message! :notice, :"signed_up_but_#{resource.inactive_message}"
               expire_data_after_sign_in!
-              respond_with resource, location: after_inactive_sign_up_path_for(resource)
+              respond_with resource, location: login_path
             end
           else
             clean_up_passwords resource
@@ -89,9 +89,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   # The path used after sign up.
-  # def after_sign_up_path_for(resource)
-    # super(resource)
-  # end
+  def after_sign_up_path_for(resource)
+    login_path
+  end
 
   # The path used after sign up for inactive accounts.
   # def after_inactive_sign_up_path_for(resource)

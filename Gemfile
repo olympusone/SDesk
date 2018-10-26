@@ -9,6 +9,8 @@ gem 'jquery-rails'
 gem 'simple_form'
 gem 'nested_form'
 
+gem 'bootstrap4-kaminari-views'
+
 gem 'sunspot_rails'
 
 gem 'font-awesome-sass', '~> 5.0.13'

@@ -1,13 +1,13 @@
 <div class="card">
   <div class="card-body">
-    <%= simple_form_for :search, url: knowledge_base_search_path, method: :get do |f| %>
-        <div class="input-group input-group-lg">
-          <div class="input-group-prepend">
-            <span class="input-group-text"><i class="fas fa-search"></i></span>
-          </div>
-          <%= f.input_field :text, class: 'form-control', required: true, label: false, placeholder: 'Enter criteria..' %>
+    <form method="get" action="<%= knowledge_base_search_path %>">
+      <div class="input-group input-group-lg">
+        <div class="input-group-prepend">
+          <span class="input-group-text"><i class="fas fa-search"></i></span>
         </div>
-    <% end %>
+        <input name="text" class="form-control" required placeholder="Enter criteria..">
+      </div>
+    </form>
   </div>
 </div>
 
@@ -26,7 +26,6 @@
           <div class="solution-folders">
             <% s.solution_folders.each do |f| %>
               <%= link_to f, class: 'solution-folder' do %>
-                <%= icon 'fas', 'folder' %>
                 <span><%= f.name %></span>
               <% end %>
             <% end %>

@@ -81,6 +81,9 @@ GEM
     bootstrap-kaminari-views (0.0.5)
       kaminari (>= 0.13)
       rails (>= 3.1)
+    bootstrap4-kaminari-views (1.0.0)
+      kaminari (>= 0.13)
+      rails (>= 3.1)
     brakeman (4.3.1)
     breadcrumbs_on_rails (3.0.1)
     builder (3.2.3)
@@ -305,6 +308,7 @@ DEPENDENCIES
   bootsnap (>= 1.1.0)
   bootstrap (~> 4.1.1)
   bootstrap-kaminari-views
+  bootstrap4-kaminari-views
   brakeman
   breadcrumbs_on_rails
   byebug

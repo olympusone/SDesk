@@ -31,3 +31,5 @@
 .vagrant
 *Vagrantfile
 /public/sitemap*
+/solr
+!/solr/solr.xml

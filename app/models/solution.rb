@@ -4,8 +4,9 @@ class Solution < ApplicationRecord
   validates :title, presence: true, uniqueness: {case_sensitive: false}
   validates_associated :solution_folder
 
-  searchable do
-    text :title, :content, :tags
+  searchable auto_index: true, auto_remove: true do
+    text :title, boost: 2.0
+    text :content, :tags
   end
 
   belongs_to :solution_folder

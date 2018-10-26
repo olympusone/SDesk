@@ -1,23 +1,23 @@
 <div class="container m-t-40 m-b-40">
   <div class="row justify-content-center align-items-center">
 
-    <div class="col-sm-6">
+    <div class="col-md-8 col-lg-7">
       <div class="card">
         <div class="card-body">
           <h4 class="card-title text-center"><%= t 'devise.registrations.title'  %></h4>
 
           <%= render 'shared/form_errors', resource: resource %>
 
-          <%= simple_nested_form_for(resource, as: resource_name, url: registration_path(resource_name), wrapper: :horizontal_form) do |f| %>
+          <%= simple_nested_form_for(resource, as: resource_name, url: registration_path(resource_name), wrapper: :horizontal_form, html:{novalidate: false}) do |f| %>
             <%= f.input :email, required: true, autofocus: true %>
-            <%= f.input :password %>
-            <%= f.input :password_confirmation %>
+            <%= f.input :password, required: true %>
+            <%= f.input :password_confirmation, required: true %>
 
             <hr>
 
             <%= f.simple_fields_for :user do |u| %>
-              <%= u.input :name %>
-              <%= u.input :lastname %>
+              <%= u.input :name, required: true %>
+              <%= u.input :lastname, required: true %>
             <% end %>
             <hr>
             <%= f.button :submit, t('devise.registrations.title'), class: 'btn-block' %>
@@ -25,7 +25,6 @@
 
           <div class="text-center m-t-10">
             <div><%= link_to t('devise.passwords.forgot_title'), new_user_password_path %></div>
-            <div><%= link_to t('devise.registrations.title'), new_user_registration_path %></div>
             <div><%= link_to t('devise.sessions.title'), new_user_session_path %></div>
           </div>
         </div>

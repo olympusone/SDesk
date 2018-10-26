@@ -96,8 +96,8 @@ body.passwords
   }
 
   .solution-folder{
-    height: 100px;
-    width: 120px;
+    height: 120px;
+    width: 160px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -106,20 +106,26 @@ body.passwords
     margin: 10px;
     text-align: center;
 
-    &:hover i{
-      color: #1abc9c;
+    &:before{
+      content: '';
+      position: absolute;
+      background: image-url('directory.png') no-repeat center center;
+      background-size: 100% 100%;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
     }
 
-    i{
-      position: absolute;
-      font-size: 120px;
-      color: #16a085;
+    &:hover i{
+      color: #1abc9c;
     }
 
     span{
       z-index: 1;
       color: white;
       font-size: 14px;
+      margin-top: 10px;
     }
   }
 }

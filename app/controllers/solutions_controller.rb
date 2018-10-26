@@ -13,7 +13,10 @@ class SolutionsController < ApplicationController
 
   def search
     add_breadcrumb I18n.t('solutions.search.title')
-    @query_text = params.require(:search).permit(:text)[:text]
+    @query_text = params[:text]
+
+    @results = Solution.where(%Q[title RLIKE ? OR content RLIKE ? OR tags RLIKE ?], @query_text, @query_text, @query_text)
+                   .page(params[:page]).per(10)
   end
 
   def index

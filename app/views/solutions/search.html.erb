@@ -1,41 +1,32 @@
 <div class="card">
   <div class="card-body">
-    <%= simple_form_for :search, url: knowledge_base_search_path, method: :get do |f| %>
+    <form method="get" action="<%= knowledge_base_search_path %>">
       <div class="input-group input-group-lg">
         <div class="input-group-prepend">
           <span class="input-group-text"><i class="fas fa-search"></i></span>
         </div>
-        <%= f.input_field :text, class: 'form-control', value: @query_text, required: true, label: false, placeholder: 'Enter criteria..' %>
+        <input name="text" class="form-control" value="<%= @query_text %>" required placeholder="Enter criteria..">
       </div>
-    <% end %>
+    </form>
   </div>
 </div>
 
 <div class="card">
   <div class="card-body">
     <h4 class="card-title">Search Result For "<%= @query_text %>"</h4>
-    <h6 class="card-subtitle">About 14,700 result ( 0.10 seconds)</h6>
+    <h6 class="card-subtitle">About <%= @results.total_count %> results</h6>
     <ul class="search-listing">
+      <% @results.each do |r| %>
       <li>
-        <h3><a href="javacript:void(0)">AngularJs</a></h3>
-        <a href="javascript:void(0)" class="search-links">http://www.google.com/angularjs</a>
-        <p>Lorem Ipsum viveremus probamus opus apeirian haec perveniri, memoriter.Praebeat pecunias viveremus probamus
-          opus apeirian haec perveniri, memoriter.</p>
+        <h3><%= link_to r.title, r %></h3>
+        <a href="javascript:void(0)" class="search-links"><%= r.solution_folder.try(:name) %> > <%= r.solution_folder.try(:solution_category).try(:name) %></a>
+        <p><%= truncate strip_tags(r.content), length: 300 %></p>
       </li>
+      <% end %>
     </ul>
 
-    <nav aria-label="Page navigation example" class="m-t-40">
-      <ul class="pagination">
-        <li class="page-item disabled">
-          <a class="page-link" href="javascript:void(0)" tabindex="-1">Previous</a>
-        </li>
-        <li class="page-item"><a class="page-link" href="javascript:void(0)">1</a></li>
-        <li class="page-item"><a class="page-link" href="javascript:void(0)">2</a></li>
-        <li class="page-item"><a class="page-link" href="javascript:void(0)">3</a></li>
-        <li class="page-item">
-          <a class="page-link" href="javascript:void(0)">Next</a>
-        </li>
-      </ul>
-    </nav>
+    <div class="m-t-40">
+      <%= paginate @results, theme: 'twitter-bootstrap-4' %>
+    </div>
   </div>
 </div>
