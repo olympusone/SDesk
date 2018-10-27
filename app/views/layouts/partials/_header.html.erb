@@ -38,8 +38,6 @@
               <%= image_tag current_user.avatar_path %>
               <span class="hidden-md-down"><%= current_user.user.name %><i class="fas fa-angle-down"></i></span> </a>
             <div class="dropdown-menu dropdown-menu-right animated flipInY">
-              <%= link_to icon('fas', 'user', t('header.profile')), current_user.user, class: 'dropdown-item' unless current_user.role? :admin %>
-              <div class="dropdown-divider"></div>
               <%= link_to icon('fas', 'power-off', t('devise.sessions.signed_out_btn')), destroy_user_session_path, class: 'dropdown-item' %>
             </div>
           </li>
