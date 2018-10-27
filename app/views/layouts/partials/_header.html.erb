@@ -38,7 +38,7 @@
               <%= image_tag current_user.avatar_path %>
               <span class="hidden-md-down"><%= current_user.user.name %><i class="fas fa-angle-down"></i></span> </a>
             <div class="dropdown-menu dropdown-menu-right animated flipInY">
-              <%= link_to icon('fas', 'user', t('header.profile')), current_user.user, class: 'dropdown-item' %>
+              <%= link_to icon('fas', 'user', t('header.profile')), current_user.user, class: 'dropdown-item' unless current_user.role? :admin %>
               <div class="dropdown-divider"></div>
               <%= link_to icon('fas', 'power-off', t('devise.sessions.signed_out_btn')), destroy_user_session_path, class: 'dropdown-item' %>
             </div>
@@ -65,18 +65,6 @@
     <nav class="sidebar-nav">
       <ul id="sidebarnav">
         <% if user_signed_in? %>
-          <li class="user-pro">
-            <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false">
-              <%= image_tag current_user.avatar_path, class: 'img-circle' %>
-              <span class="hide-menu"><%= current_user.email %></span>
-            </a>
-            <ul aria-expanded="false" class="collapse">
-              <li><a href="javascript:void(0)"><i class="ti-user"></i> My Profile</a></li>
-              <li><a href="javascript:void(0)"><i class="ti-settings"></i> Account Setting</a></li>
-              <%= link_to icon('fas', 'power-off', t('devise.sessions.signed_out_btn')), destroy_user_session_path %>
-            </ul>
-          </li>
-
           <% unless current_user.role? :requester %>
             <li>
               <%= link_to icon('fas', 'tachometer-alt', t('admins.dashboard.title')), root_path, class: 'waves-effect waves-dark' %>

@@ -1,5 +1,7 @@
 class TicketRepliesController < ApplicationController
-  load_and_authorize_resource :ticket_reply
+  load_and_authorize_resource :ticket
+  load_and_authorize_resource :ticket_reply, through: :ticket
+
   before_action :authenticate_user!
 
   def new

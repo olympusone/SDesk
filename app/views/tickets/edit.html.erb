@@ -64,12 +64,14 @@
               <% end %>
             </div>
 
-            <div id="ticket-reply-holder"></div>
-            <hr>
+            <% if can? :create, TicketReply %>
+              <div id="ticket-reply-holder"></div>
+              <hr>
 
-            <div class="text-center">
-              <%= link_to icon('fas', 'plus', t('ticket_replies.new.title')), new_ticket_ticket_reply_path(@ticket), remote: true, class: 'mt-2 btn btn-primary' %>
-            </div>
+              <div class="text-center">
+                <%= link_to icon('fas', 'plus', t('ticket_replies.new.title')), new_ticket_ticket_reply_path(@ticket), remote: true, class: 'mt-2 btn btn-primary' %>
+              </div>
+            <% end %>
           </div>
         </div>
       <% end %>
@@ -84,7 +86,7 @@
             <%= f.association :agent, include_blank: :translate, label_method: lambda{|ag| "#{ag.fullname} - #{ag.user.email}"}, input_html: {class: 'select2'} %>
           <% end %>
           <hr>
-          <%= f.input :priority, include_blank: false, input_html: {class: 'select2'} %>
+          <%= f.input :priority, include_blank: false, input_html: {class: 'select2', disabled: @ticket.persisted?} %>
           <% if user_signed_in? && !current_user.role?(:requester) %>
             <%= f.input :state, include_blank: false, input_html: {class: 'select2'} %>
           <% end %>

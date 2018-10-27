@@ -46,7 +46,7 @@ module ApplicationHelper
   end
 
   def page_title
-    content_for?(:page_title) ? yield(:page_title) : I18n.t([controller_name, action_name, 'title'].join('.'))
+    content_for?(:title) ? content_for(:title) : I18n.t([controller_name, action_name, 'title'].join('.'))
   end
 
   def header_btn(title, link, options = {})

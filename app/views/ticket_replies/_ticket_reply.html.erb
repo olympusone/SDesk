@@ -2,7 +2,7 @@
   <div class="ticket-reply-inner">
     <b><%= link_to_if can?(:show, ticket_reply.replier), ticket_reply.replier.fullname, ticket_reply.replier, target: :blank %></b>
     <span class="label label-purple">
-      <%= ticket_reply.created_at.to_s(:small) %>
+      <%= ticket_reply.created_at.to_s %>
     </span>
     <hr>
     <%= ticket_reply.content %>

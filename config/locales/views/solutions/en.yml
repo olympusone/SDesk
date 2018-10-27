@@ -9,7 +9,7 @@ en:
     create:
       title: 'New Solution'
     show:
-      title: 'Solution'
+      title: 'Solution: %{title}'
     edit:
       title: 'Edit Solution'
     update:
