@@ -19,7 +19,7 @@ class TicketDatatable < AjaxDatatablesRails::Base
     records.map do |record|
       {
           requester: link_to_if(can?(:show, record.requester), record.requester.try(:fullname), record.requester, target: :blank),
-          agent: link_to_if((record.agent && can?(:read, record.agent)), record.agent.try(:lastname), record.agent, target: :blank),
+          agent: link_to_if((record.agent && can?(:read, record.agent)), record.agent.try(:fullname), record.agent, target: :blank),
           department: record.department.try(:name),
           subject: link_to(record.subject, edit_ticket_path(record)),
           priority: record.priority_text,

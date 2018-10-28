@@ -64,7 +64,7 @@ class TicketTemplatesController < ApplicationController
   private
 
   def ticket_template_params
-    params.require(:ticket_template).permit(:name, :active, :subject, :description, :priority, :state, :tags, :agent_id,
+    params.require(:ticket_template).permit(:name, :active, :subject, :description, :priority, :state, :agent_id,
                                     :department_id)
   end
 end

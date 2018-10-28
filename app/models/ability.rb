@@ -15,6 +15,7 @@ class Ability
       can :update, Requester, id: user.user_id
       can :create, Ticket
       can [:read, :update], Ticket, requester_id: user.user_id
+      can :show, TicketTemplate
       can :create, TicketReply, ticket:{requester_id: user.user_id}
       can :read, [SolutionCategory, SolutionFolder, Solution]
       can [:knowledge_base, :search], Solution

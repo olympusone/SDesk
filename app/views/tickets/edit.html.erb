@@ -14,12 +14,15 @@
             <%= f.association :requester, include_blank: :translate, label_method: lambda{|r| "#{r.fullname} - #{r.user.email}"}, input_html: {class: 'select2'} %>
           <% end %>
 
-          <%= f.association :ticket_template, include_blank: :translate, input_html: {class: 'select2'} %>
-          <%= f.input :subject %>
-          <%= f.input :tags, input_html: {class: 'tagsinput'} %>
+          <%= f.association :ticket_template, include_blank: :translate, input_html: {class: 'select2', disabled: @ticket.persisted? && current_user.role?(:requester)} %>
+          <%= f.input :subject, input_html:{disabled: @ticket.persisted? && current_user.role?(:requester)} %>
           <hr>
 
-          <%= f.input :description, input_html: {class: 'tinymce'} %>
+          <% if @ticket.persisted? && current_user.role?(:requester) %>
+            <%= @ticket.description.try :html_safe %>
+          <% else %>
+            <%= f.input :description, input_html: {class: 'tinymce'} %>
+          <% end %>
         </div>
       </div>
 
@@ -86,7 +89,7 @@
             <%= f.association :agent, include_blank: :translate, label_method: lambda{|ag| "#{ag.fullname} - #{ag.user.email}"}, input_html: {class: 'select2'} %>
           <% end %>
           <hr>
-          <%= f.input :priority, include_blank: false, input_html: {class: 'select2', disabled: @ticket.persisted?} %>
+          <%= f.input :priority, include_blank: false, input_html: {class: 'select2', disabled: @ticket.persisted? && current_user.role?(:requester)} %>
           <% if user_signed_in? && !current_user.role?(:requester) %>
             <%= f.input :state, include_blank: false, input_html: {class: 'select2'} %>
           <% end %>
@@ -114,13 +117,6 @@
                       let template = data.ticket_template;
 
                       template.subject && $('#ticket_subject').val(template.subject);
-
-                      if(template.tags){
-                          _.each(template.tags.split(','), function (v) {
-                              $('#ticket_tags').tagsinput('add', v);
-                          });
-                      }
-
                       template.description && tinyMCE.get('ticket_description').setContent(template.description);
                       template.department_id && $('#ticket_department_id').val(template.department_id).change();
                       template.agent_id && $('#ticket_agent_id').val(template.agent_id).change();

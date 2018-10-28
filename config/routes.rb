@@ -9,11 +9,17 @@ Rails.application.routes.draw do
   }
 
   devise_scope :user do
+    unauthenticated do
+      root 'devise/sessions#new'
+    end
+
     get '/login', to: 'devise/sessions#new'
   end
 
-  root 'dashboard#index' #, constraints: lambda { |request| request.env['warden'].user.present?}
-  # root 'tickets#new'
+  authenticated :user do
+    root 'dashboard#index' , constraints: lambda { |request| !request.env['warden'].user.role?(:requester)}
+    root 'tickets#index'
+  end
 
   resources :admins, except: :show
   resources :agents

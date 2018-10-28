@@ -69,14 +69,14 @@ class TicketsController < ApplicationController
   def ticket_params
     if user_signed_in?
       if current_user.role? :requester
-        params.require(:ticket).permit(:department_id, :subject, :priority, :description, :tags,
+        params.require(:ticket).permit(:department_id, :subject, :priority, :description,
                                        file_attachments_attributes: [:id, :_destroy, :file])
       else
-        params.require(:ticket).permit(:requester_id, :agent_id, :department_id, :priority, :state, :tags, :subject, :description,
+        params.require(:ticket).permit(:requester_id, :agent_id, :department_id, :priority, :state, :subject, :description,
                                        file_attachments_attributes: [:id, :_destroy, :file])
       end
     else
-      params.require(:ticket).permit(:email, :department_id, :priority, :tags, :subject, :description,
+      params.require(:ticket).permit(:email, :department_id, :priority, :subject, :description,
                                      file_attachments_attributes: [:id, :_destroy, :file])
     end
   end
