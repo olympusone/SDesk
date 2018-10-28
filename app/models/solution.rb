@@ -2,6 +2,7 @@ class Solution < ApplicationRecord
   before_validation :strip_tags
 
   validates :title, presence: true, uniqueness: {case_sensitive: false}
+  validates_presence_of :content
   validates_associated :solution_folder
 
   searchable auto_index: true, auto_remove: true do
