@@ -1,4 +1,4 @@
-<%= header_btn(t("agents.new.title"), new_agent_path) %>
+<% header_btn(t("agents.new.title"), new_agent_path) %>
 
 <%= simple_nested_form_for setup_agent(@agent), wrapper: :horizontal_form ,html:{multipart: true} do |f| %>
 

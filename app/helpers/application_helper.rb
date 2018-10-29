@@ -113,15 +113,4 @@ module ApplicationHelper
       link_to t('btn.delete'), send("#{resource.model_name.param_key}_path"), class: btn_class.join(' '), method: :delete, remote: options[:remote].present?, data: {confirm: t('confirmation.delete')}
     end
   end
-
-  # return value from datatable params by given index
-  def dt_params_val(index, options = {})
-    _param = params['columns'][index.to_s]['search']['value']
-
-    if options[:join].present?
-      _param.split(',').map(&:strip).reject(&:blank?).join(options[:join])
-    else
-      _param
-    end
-  end
 end

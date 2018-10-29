@@ -1,4 +1,4 @@
-<%= header_btn(t("departments.new.title"), new_department_path, remote: true) if can?(:create, Department) %>
+<% header_btn(t("departments.new.title"), new_department_path, remote: true) if can?(:create, Department) %>
 
 <div class="card">
   <div class="card-body">

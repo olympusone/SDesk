@@ -1,4 +1,4 @@
-<%= header_btn(t("requesters.edit.title"), edit_requester_path(@requester)) if can?(:update, Requester) %>
+<% header_btn(t("requesters.edit.title"), edit_requester_path(@requester)) if can?(:update, Requester) %>
 
 <div class="row">
   <!-- Column -->

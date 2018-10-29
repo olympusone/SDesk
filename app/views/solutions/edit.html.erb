@@ -1,4 +1,4 @@
-<%= header_btn(t("solutions.new.title"), new_solution_path) if can?(:create, Solution) %>
+<% header_btn(t("solutions.new.title"), new_solution_path) if can?(:create, Solution) %>
 
 <%= simple_nested_form_for setup_solution(@solution), wrapper: :horizontal_form, html:{multipart: true} do |f| %>
 

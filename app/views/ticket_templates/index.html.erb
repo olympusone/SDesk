@@ -1,4 +1,4 @@
-<%= header_btn(t("ticket_templates.new.title"), new_ticket_template_path) if can?(:create, TicketTemplate) %>
+<% header_btn(t("ticket_templates.new.title"), new_ticket_template_path) if can?(:create, TicketTemplate) %>
 
 <div class="card">
   <div class="card-body">

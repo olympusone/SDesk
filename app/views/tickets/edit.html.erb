@@ -1,4 +1,4 @@
-<%= header_btn(t("tickets.new.title"), new_ticket_path) if can?(:create, Ticket) && user_signed_in? %>
+<% header_btn(t("tickets.new.title"), new_ticket_path) if can?(:create, Ticket) && user_signed_in? %>
 
 <%= simple_nested_form_for setup_ticket(@ticket), html:{multipart: true} do |f| %>
 

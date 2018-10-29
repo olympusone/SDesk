@@ -1,4 +1,4 @@
-<%= header_btn(t("requesters.new.title"), new_requester_path) %>
+<% header_btn(t("requesters.new.title"), new_requester_path) %>
 
 <%= simple_nested_form_for setup_requester(@requester), wrapper: :horizontal_form ,html:{multipart: true} do |f| %>
 
