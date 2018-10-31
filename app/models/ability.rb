@@ -20,6 +20,7 @@ class Ability
       can :read, [SolutionCategory, SolutionFolder, Solution]
       can [:knowledge_base, :search], Solution
     else
+      can :show, TicketTemplate
       can :create, Ticket
       can [:knowledge_base, :show, :search], Solution
       can :read, [SolutionCategory, SolutionFolder, Solution]

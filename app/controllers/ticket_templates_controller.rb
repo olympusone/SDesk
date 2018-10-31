@@ -1,6 +1,6 @@
 class TicketTemplatesController < ApplicationController
   load_and_authorize_resource
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: :show
 
   add_breadcrumb I18n.t('settings.index.title')
   add_breadcrumb I18n.t('activerecord.models.ticket_template.other'), :ticket_templates_path

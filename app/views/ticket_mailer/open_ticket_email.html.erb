@@ -5,7 +5,7 @@ Mr/Miss <b><%= @requester.fullname %></b>.
 </p>
 
 <p>
-You can track the progress of your request or add a comment by clicking <%= link_to 'here', ticket_url(id: @ticket.id) %>.
+You can track the progress of your request or add a comment by clicking <%= link_to 'here', edit_ticket_url(id: @ticket.id) %>.
 </p>
 
 With Regards,<br>
