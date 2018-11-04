@@ -1,5 +1,6 @@
 class Requester < ApplicationRecord
   validates_presence_of :name, :lastname
+  validates_associated :company
 
   has_one :user, as: :user, dependent: :destroy
   has_many :tickets, dependent: :destroy

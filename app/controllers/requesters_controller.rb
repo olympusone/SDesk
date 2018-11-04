@@ -19,6 +19,10 @@ class RequestersController < ApplicationController
   def create
     @requester = Requester.new(requester_params)
 
+    if @requester.user
+      @requester.company = Company.find_by_domain @requester.user.email.split('@').last
+    end
+
     if @requester.save
       redirect_to requesters_path, notice: t('.success', value: @requester.fullname)
     else
@@ -69,7 +73,7 @@ class RequestersController < ApplicationController
 
   private
   def requester_params
-    params.require(:requester).permit(:name, :lastname, :title, :company_id, :title, :notes,
+    params.require(:requester).permit(:name, :lastname, :title, :title, :notes,
                                       user_attributes:[:email, :password, :password_confirmation, :locked, :confirmed])
   end
 
