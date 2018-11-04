@@ -8,7 +8,7 @@ class Ability
     elsif user.role? :agent
       can :update, Agent, id: user.user_id
       can :manage, [Ticket, TicketTemplate]
-      can :create, TicketReply, ticket:{agent_id: user.user_id}
+      can :create, TicketReply
       can :manage, Requester
       can :manage, [SolutionCategory, SolutionFolder, Solution]
     elsif user.role? :requester
