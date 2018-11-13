@@ -95,5 +95,5 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   # Allowing host
-  config.action_mailer.default_url_options = { host: "sdesk.olympusone.com" }
+  config.action_mailer.default_url_options = { host: "sdesk.com" }
 end
